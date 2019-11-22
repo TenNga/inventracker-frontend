@@ -20,7 +20,7 @@ class SignUp extends Component {
     }
 
     handleSignup = () => { //handle fetch request
-        fetch("http://localhost:3000/api/v1/users",{
+        fetch("http://10.0.2.2:3000/api/v1/users",{
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -30,10 +30,11 @@ class SignUp extends Component {
         })
         .then(res => res.json())
         .then(user=>this.props.setUser(user))
+        .then(()=>this.props.navigation.navigate('Home'))
     }
 
     render(){
-        console.log("Main State for user: ", this.props.state)
+        // console.log("Main State for user: ", this.props.state)
         return(
         <View style={styles.container}>
             <Header 

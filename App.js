@@ -29,7 +29,7 @@ const navigator = createDrawerNavigator(
     }
   },
   {
-    initialRouteName: 'Home',
+    initialRouteName: 'Login',
     drawerPosition: 'right',
     drawerType: 'slide',
     defaultNavigationOptions: {

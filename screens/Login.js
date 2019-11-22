@@ -4,7 +4,8 @@ import {
     View, 
     StyleSheet, 
     TextInput, 
-    Alert} from 'react-native'
+    Alert} from 'react-native';
+import { setUser } from '../actions';
 import { connect } from 'react-redux';
 import { Header } from 'react-native-elements';
 
@@ -22,7 +23,7 @@ class Login extends Component {
     }
 
     handleLogin = () => {
-        fetch("http://localhost:3000/api/v1/login",{
+        fetch("http://10.0.2.2:3000/api/v1/login",{
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -31,7 +32,17 @@ class Login extends Component {
             body: JSON.stringify(this.state)
         })
         .then(res => res.json())
-        .then(response => Alert.alert("Error",response.errors))
+        .then(this.handleResponse)
+    }
+    handleResponse = (resp) => {
+        if(resp.errors)
+            Alert.alert("Error",resp.errors)
+        else{
+            console.log("User Info after Fetch:=======> ,", resp)
+            this.props.setUser(resp)
+            this.props.navigation.navigate('Home')
+        }
+
     }
 
     render(){
@@ -117,4 +128,4 @@ const styles = StyleSheet.create({
         bottom: 0
     }
 })
-export default connect()(Login);
+export default connect(null, { setUser })(Login);
