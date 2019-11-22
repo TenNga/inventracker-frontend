@@ -4,13 +4,9 @@ import {
     View, 
     StyleSheet, 
     TextInput, 
-    Button, 
-    Alert, 
-    TouchableOpacity} from 'react-native'
+    Alert} from 'react-native'
 import { connect } from 'react-redux';
-import {setUsername} from '../actions'
 import { Header } from 'react-native-elements';
-import {Footer} from 'native-base'
 
 class Login extends Component {
     state = {
@@ -46,8 +42,8 @@ class Login extends Component {
             centerComponent={{ text: 'Welcome', style: { color: '#fff', fontSize: 30} }}
             />
             <View style={styles.formContainer}>
-                <Text style={{ textAlign: 'center',fontSize: 50, height: 50,color: 'white'}}>InvenTracker</Text>
-                <Text style={{ textAlign: 'center',fontSize: 18, height: 30,color: 'white'}}>Made Inventory Simple And Easy</Text>
+                <Text style={{ textAlign: 'center',fontSize: 50,fontWeight: 'bold', color: 'white'}}>InvenTracker</Text>
+                <Text style={{ textAlign: 'center',fontSize: 18, color: 'white'}}>Made Inventory Simple And Easy</Text>
                 <View style={styles.userInfo}>
                     <Text style={{  fontSize: 23, color: 'white' }}>User Info</Text>
                 </View>

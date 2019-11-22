@@ -2,11 +2,12 @@ import React, { Component } from 'react';
 import { createAppContainer} from 'react-navigation';
 import { createDrawerNavigator } from 'react-navigation-drawer';
 import { createStackNavigator } from 'react-navigation-stack';
-import Login from './container/Login';
-import Signup from './container/Signup';
-import reducer from './reducers'
+import Login from './screens/Login';
+import Signup from './screens/Signup';
+import Landing from './screens/Landing';
+import reducer from './reducers';
 import { Provider} from 'react-redux';
-import { createStore } from 'redux'
+import { createStore } from 'redux';
 
 
 const navigator = createDrawerNavigator(
@@ -22,10 +23,13 @@ const navigator = createDrawerNavigator(
       navigationOptions:{
         drawerLockMode: 'locked-closed'
       }
+    },
+    Home: {
+      screen: Landing
     }
   },
   {
-    initialRouteName: 'Login',
+    initialRouteName: 'Home',
     drawerPosition: 'right',
     drawerType: 'slide',
     defaultNavigationOptions: {
