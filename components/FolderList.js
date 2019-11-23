@@ -1,15 +1,16 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image } from 'react-native';
-import { setCurrentFolderId, setCurrentFolder } from '../actions';
+import { View, Text, StyleSheet, Image,TouchableOpacity } from 'react-native';
+import { setCurrentFolderId, setCurrentFolder, setParentFolder } from '../actions';
 import { connect } from 'react-redux';
-import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const FolderList = (props) => {
 
     const handleFolderSelection = () => {
-        const folder = props.current_folders.find(folder => folder.id === props.folderInfo.id)
-        props.setCurrentFolder(folder.folders);
-        props.setCurrentFolderId(props.folderInfo.id)
+        // const folder = props.current_folders.find(folder => folder.id === props.folderInfo.id);
+        props.setCurrentFolder(props.folderInfo.folders);
+        props.setParentFolder(props.folderInfo);
+        props.setCurrentFolderId(props.folderInfo.id);
+        console.log( "Parent Folder:=-=-=-=-=-> ", props.folderInfo)
     }
 
     return(
@@ -52,7 +53,8 @@ const styles = StyleSheet.create({
 })
 mapStateToProps = (state) =>{
     return {
-        current_folders: state.current_folders
+        current_folders: state.current_folders,
+        parent_folder: state.parent_folder
     }
 }
-export default connect(mapStateToProps, {setCurrentFolderId, setCurrentFolder })(FolderList);
+export default connect(mapStateToProps, {setCurrentFolderId, setCurrentFolder, setParentFolder })(FolderList);

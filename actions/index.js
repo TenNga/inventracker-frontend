@@ -13,3 +13,6 @@ export function removeUser() {
 export function setCurrentFolder(folders){
     return {type: "SET_CURRENT_FOLDER", payload: folders}
 }
+export function setParentFolder(folder){
+    return { type: "SET_PARENT_FOLDER", payload: folder}
+}

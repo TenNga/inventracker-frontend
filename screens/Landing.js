@@ -9,7 +9,7 @@ import { connect } from 'react-redux';
 import BottomFooter from '../components/BottomFooter';
 import FolderContainer from '../container/FolderContainer';
 
-const Landing = () => {
+const Landing = (props) => {
     return(
         <View style={{flex: 1}}>
             <TopHeader headerText={"InvenTracker"} />
@@ -31,10 +31,10 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     mainContainer: {
-        flex: 6
+        flex: 5.7
     },
     footer: {
-        flex: 1
+        flex: 1.3
     }
 })
 export default Landing;

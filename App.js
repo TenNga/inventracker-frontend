@@ -5,12 +5,13 @@ import { createStackNavigator } from 'react-navigation-stack';
 import Login from './screens/Login';
 import Signup from './screens/Signup';
 import Landing from './screens/Landing';
+import NewFolder from './screens/NewFolder';
 import reducer from './reducers';
 import { Provider} from 'react-redux';
 import { createStore } from 'redux';
 
 
-const navigator = createDrawerNavigator(
+const navigator = createStackNavigator(
   {
     Login: {
       screen: Login,
@@ -26,23 +27,25 @@ const navigator = createDrawerNavigator(
     },
     Home: {
       screen: Landing
+    },
+    NewFolder: {
+      screen: NewFolder
     }
   },
   {
     initialRouteName: 'Login',
     drawerPosition: 'right',
     drawerType: 'slide',
-    defaultNavigationOptions: {
-      title: 'InvenTracker',
-      headerStyle: {
-        backgroundColor: '#0E82A7',
-      },
       headerTitleStyle:{
         color: 'white',
         fontWeight: 'bold',
         fontSize: 30
-      }
+      },
+      headerMode: 'none',
+    navigationOptions: {
+        headerVisible: false,
     }
+    
   }
 );
 const Navigation = createAppContainer(navigator);

@@ -1,13 +1,31 @@
-import React from 'react';
-import { View, StyleSheet} from 'react-native';
+import React,{Component} from 'react';
+import { View, Text, StyleSheet} from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
-const BottomFooter = () => {
-    return(
-        <View style={styles.footer}>
-              <Ionicons name="ios-add-circle-outline" size={60} color="#0E82A7" style={styles.addBtn} />
-        </View>
-    )
+import AddOption from './AddOption';
+
+class BottomFooter extends Component {
+    state= {
+        clicked: false
+    }
+    handleClick = () => {
+        this.setState(prevState => ({clicked: !prevState.clicked}))
+    }
+    render(){
+        return(
+            <View style={styles.footer}>
+                {this.state.clicked ?
+                    <AddOption handleClicked = {this.handleClick} /> :
+                        <Ionicons 
+                            onPress={this.handleClick}
+                            name="ios-add-circle-outline" 
+                            size={60} color="#0E82A7" 
+                            style={styles.addBtn} 
+                        />
+                }
+            </View>
+        )
+    }
 }
 const styles = StyleSheet.create({
     footer: {
@@ -15,10 +33,9 @@ const styles = StyleSheet.create({
     },
     addBtn: {
         flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
         marginRight: 20,
         alignSelf: 'flex-end',
+        justifyContent: 'center'
     }
 })
 export default BottomFooter;
