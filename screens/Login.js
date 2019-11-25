@@ -33,6 +33,7 @@ class Login extends Component {
         })
         .then(res => res.json())
         .then(this.handleResponse)
+        
     }
     handleResponse = (resp) => {
         if(resp.errors)
@@ -42,7 +43,7 @@ class Login extends Component {
             this.props.setUser(resp)
             this.props.navigation.navigate('Home')
         }
-
+    this.setState({user_name: "", password: ""})
     }
 
     render(){

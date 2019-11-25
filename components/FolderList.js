@@ -1,6 +1,7 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image,TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, Image,TouchableOpacity, Modal } from 'react-native';
 import { setCurrentFolderId, setCurrentFolder, setParentFolder } from '../actions';
+import DeleteFolderModal from './DeleteFolderModal'
 import { connect } from 'react-redux';
 import { Ionicons } from '@expo/vector-icons';
 
@@ -12,6 +13,19 @@ const FolderList = (props) => {
         props.setParentFolder(props.folderInfo);
         props.setCurrentFolderId(props.folderInfo.id);
         // console.log( "Parent Folder:=-=-=-=-=-> ", props.folderInfo)
+    }
+
+    const handleDelete = () => {
+        const newFolders = props.current_folders.filter(f => f.id !== props.folderInfo.id)
+        props.setCurrentFolder(newFolders);
+        fetch("http://10.0.2.2:3000/api/v1/folders/"+props.folderInfo.id,{
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+                "Accepts": "application/json"
+            }
+        }).then(()=>console.log("After Fetchinging....."))
+        
     }
 
     return(
@@ -26,8 +40,10 @@ const FolderList = (props) => {
                 <Text style = {styles.folderDes}>Qty: xxx | Sub: {props.folderInfo.folders.length} | $xxx</Text>
             </View>
             </TouchableOpacity>
-            <View style={{alignSelf:'flex-start', marginRight: 20}}>
-            <Ionicons name="ios-trash" size={30} color="#0E82A7" />
+            <View  style={{alignSelf:'flex-start', marginRight: 20}}>
+                <TouchableOpacity onPress={handleDelete}>
+            <Ionicons  name="ios-trash" size={30} color="#0E82A7" />
+                </TouchableOpacity>
             </View>
         </View>
     )

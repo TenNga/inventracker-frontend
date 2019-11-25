@@ -32,8 +32,6 @@ const handleBack = (props) => {
             props.setParentFolder("");
             props.setCurrentFolderId(null);
         }
-    
-    
 }
 
 fetchUser = (props) => {

@@ -3,7 +3,6 @@ const defaultState = {
     parent_folder: "",
     current_folder_id: null,
     current_folders: []
-
 }
 
 function reducer(prevState = defaultState, action){
@@ -20,6 +19,13 @@ function reducer(prevState = defaultState, action){
             return { ...prevState, parent_folder: action.payload }
         case "UPDATE_CURRENT_FOLDER":
             return { ...prevState, current_folders: [...prevState.current_folders, action.payload]}
+        case "CLEAR_STATE":
+            return{...prevState,
+                user: "",
+                parent_folder: "",
+                current_folder_id: null,
+                current_folders: []
+            }
         default:
             return prevState
     }
