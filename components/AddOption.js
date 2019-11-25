@@ -6,7 +6,10 @@ const AddOption = (props) => {
     return(
         <View style={styles.container}>
             <View style={styles.option}>
-                <Text onPress={()=>props.navigation.navigate('NewFolder')} style={styles.optionBtn}>FOLDER</Text>
+                <Text onPress={()=>{
+                    props.handleClicked()
+                    props.navigation.navigate('NewFolder')
+                }} style={styles.optionBtn}>FOLDER</Text>
                 <Text style={styles.optionBtn}>PRODUCT</Text>
             </View>
             <View style={styles.cancelBtn}>

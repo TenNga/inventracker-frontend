@@ -18,6 +18,8 @@ function reducer(prevState = defaultState, action){
             return {...prevState, current_folders: action.payload }
         case "SET_PARENT_FOLDER":
             return { ...prevState, parent_folder: action.payload }
+        case "UPDATE_CURRENT_FOLDER":
+            return { ...prevState, current_folders: [...prevState.current_folders, action.payload]}
         default:
             return prevState
     }

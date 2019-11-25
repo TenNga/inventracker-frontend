@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text, View, StyleSheet,TouchableOpacity } from 'react-native';
-import { setCurrentFolder, setParentFolder, setCurrentFolderId } from '../actions';
+import { setCurrentFolder, setParentFolder, setCurrentFolderId, setUser } from '../actions';
 import { connect } from 'react-redux';
 import { Ionicons } from '@expo/vector-icons';
 
@@ -19,19 +19,31 @@ const BackBtn = (props) => {
 }
 
 const handleBack = (props) => {
-    let parentFolder;
-    if(props.parent_folder.folder_id){
-        parentFolder = props.user_folders.find(f => f.id === props.parent_folder.folder_id)
-        props.setCurrentFolder(parentFolder.folders)
-        props.setParentFolder(parentFolder);
-        props.setCurrentFolderId(parentFolder.id);
-    }
-    else {
-        props.setCurrentFolder(props.user.folders.filter(f => f.folder_id === null))
-        props.setParentFolder("");
-        props.setCurrentFolderId(null);
-    }
+        fetchUser(props);
+        let parentFolder;
+        if(props.parent_folder.folder_id){
+            parentFolder = props.user_folders.find(f => f.id === props.parent_folder.folder_id)
+            props.setCurrentFolder(parentFolder.folders)
+            props.setParentFolder(parentFolder);
+            props.setCurrentFolderId(parentFolder.id);
+        }
+        else {
+            props.setCurrentFolder(props.user.folders.filter(f => f.folder_id === null))
+            props.setParentFolder("");
+            props.setCurrentFolderId(null);
+        }
     
+    
+}
+
+fetchUser = (props) => {
+    return (
+        fetch("http://10.0.2.2:3000/api/v1/users/"+props.user.id)
+        .then(resp => resp.json())
+        .then((user)=>{
+            props.setUser(user)
+        })
+        )
 }
 
 const styles = StyleSheet.create({
@@ -51,4 +63,4 @@ mapStateToProps = (state) => {
         user_folders: state.user.folders
     }
 }
-export default connect(mapStateToProps, { setCurrentFolder, setParentFolder, setCurrentFolderId})(BackBtn);
+export default connect(mapStateToProps, { setCurrentFolder, setParentFolder, setCurrentFolderId, setUser})(BackBtn);

@@ -16,3 +16,6 @@ export function setCurrentFolder(folders){
 export function setParentFolder(folder){
     return { type: "SET_PARENT_FOLDER", payload: folder}
 }
+export function updateCurrentFolder(folder) {
+    return{ type: "UPDATE_CURRENT_FOLDER", payload: folder}
+}

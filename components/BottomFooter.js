@@ -29,13 +29,13 @@ class BottomFooter extends Component {
 }
 const styles = StyleSheet.create({
     footer: {
-        flex:1
+        flex:1,
+        backgroundColor: 'rgba(54,54,54,0)'
     },
     addBtn: {
         flex: 1,
         marginRight: 20,
-        alignSelf: 'flex-end',
-        justifyContent: 'center'
+        alignSelf: 'flex-end'
     }
 })
 export default BottomFooter;

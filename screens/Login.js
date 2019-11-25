@@ -38,7 +38,7 @@ class Login extends Component {
         if(resp.errors)
             Alert.alert("Error",resp.errors)
         else{
-            console.log("User Info after Fetch:=======> ,", resp)
+            // console.log("User Info after Fetch:=======> ,", resp)
             this.props.setUser(resp)
             this.props.navigation.navigate('Home')
         }

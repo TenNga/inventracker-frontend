@@ -4,10 +4,11 @@ import FolderList from '../components/FolderList';
 import { setCurrentFolder, setUser } from '../actions';
 import { connect } from 'react-redux';
 import ProductList from '../components/ProductList';
+import { Ionicons } from '@expo/vector-icons';
 
 class FolderContainer extends Component {
 
-    componentDidMount(){
+    fetchUser = () => {
         fetch("http://10.0.2.2:3000/api/v1/users/"+this.props.currentUser.id)
         .then(resp => resp.json())
         .then((user)=>{
@@ -16,22 +17,29 @@ class FolderContainer extends Component {
         })
     }
 
+    componentDidMount(){
+        this.fetchUser()
+    }
+
     render(){
-        console.log("Current Folder ID: ", this.props.current_folder_id)
-        console.log("Current Folders: ", this.props.current_folders.length)
+        // console.log("Rendering Landing Page.........")
+        // console.log("Current Folder ID: ", this.props.current_folder_id)
+        // console.log("Current Folders: ", this.props.current_folders.length)
         // console.log("Current User Infomation=============>: ", this.props.currentUser)
         return(
             <View style={styles.mainFolderContainer}>
                 {this.props.current_folders && this.props.current_folders.length? 
                 <View>
-                    <Text style = {{fontSize: 18, textTransform: 'uppercase'}}>Folder</Text>
+                    <Text style = {{fontSize: 18, textTransform: 'uppercase'}}>
+                         <Ionicons name="ios-folder-open" size={30} color="#0E82A7" />Folder
+                    </Text>
                         <FlatList 
                             data={this.props.current_folders}
                             renderItem={({item}) => <FolderList folderInfo={item} />}
                             keyExtractor={item=>item.id.toString()}
                         /> 
                 </View> : null }
-                
+
                     {this.props.parent_folder.products && this.props.parent_folder.products.length? 
                     <View>
                         <Text style = {{fontSize: 18, textTransform: 'uppercase'}}>products</Text>
@@ -48,7 +56,7 @@ class FolderContainer extends Component {
 const styles = StyleSheet.create({
     mainFolderContainer: {
         flex: 1,
-        marginHorizontal: 15
+        marginHorizontal: 5
     }
 })
 
