@@ -14,7 +14,7 @@ class SearchBar extends Component {
     }
 
     handleSubmit = () =>{
-        fetch("http://localhost/api/v1/folders")
+        fetch("http://localhost:3000/api/v1/folders")
         .then(res => res.json())
         .then((folders)=>{
             const match = folders.filter(f => f.name.includes(this.state.term))

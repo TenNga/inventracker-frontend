@@ -7,7 +7,11 @@ import Signup from './screens/Signup';
 import Landing from './screens/Landing';
 import NewFolder from './screens/NewFolder';
 import NewProduct from './screens/NewProduct';
-import ImagePicker from './screens/ImagePick';
+// import ImagePicker from './screens/ImagePick';
+import Profile from './screens/Profile';
+import Contact from './screens/Contact';
+import Menu from './screens/Menu';
+
 import reducer from './reducers';
 import { Provider} from 'react-redux';
 import { createStore } from 'redux';
@@ -36,8 +40,14 @@ const navigator = createStackNavigator(
     NewProduct: {
       screen: NewProduct
     },
-    ImagePicker: {
-      screen: ImagePicker
+    Profile: {
+      screen: Profile,
+    }, 
+    Contact: {
+      screen: Contact,
+    }, 
+    Menu: {
+      screen: Menu,
     }
   },
   {

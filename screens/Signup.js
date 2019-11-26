@@ -13,11 +13,15 @@ import { setUser } from '../actions'
 
 class SignUp extends Component {
     state = {
-        user_name: "",
-        first_name: "",
-        last_name: "",
-        password: ""
-    }
+        user:{
+            user_name: "",
+            first_name: "",
+            last_name: "",
+            password: ""
+        },
+        color: "rgb(242, 246, 247)"
+
+}
 
     handleSignup = () => { //handle fetch request
         fetch("http://localhost/api/v1/users",{
@@ -26,11 +30,18 @@ class SignUp extends Component {
                 "Content-Type": "application/json",
                 "Accepts": "application/json"
             },
-            body: JSON.stringify(this.state)
+            body: JSON.stringify(this.state.user)
         })
         .then(res => res.json())
         .then(user=>this.props.setUser(user))
         .then(()=>this.props.navigation.navigate('Home'))
+    }
+
+    handlePasswordColor = () => {
+        if(this.state.user.password.length < 6)
+            this.setState({color: "red"})
+        else if(this.state.user.password.length > 6)
+            this.setState({color: "green"})
     }
 
     render(){
@@ -65,7 +76,10 @@ class SignUp extends Component {
                 />
             <TextInput 
                 placeholder="Password" 
-                onChangeText={(v)=>this.setState({password: v})}
+                onChangeText={(v)=>{
+                    this.setState({password: v},this.handlePasswordColor());
+                    
+                }}
                 value={this.state.password}
                 secureTextEntry
                 style={styles.input}
@@ -119,7 +133,7 @@ const styles = StyleSheet.create({
         marginVertical: 10
     },
     input: {
-        backgroundColor: 'rgb(242, 246, 247)',
+        backgroundColor: "white",
         paddingLeft: 5,
         marginVertical: 10,
         height: 35,

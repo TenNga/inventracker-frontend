@@ -6,9 +6,9 @@ import { connect } from 'react-redux';
 import { withNavigation } from 'react-navigation';
 import { clearState } from '../actions';
 
-handleLogOut = (props) => {
-    props.navigation.navigate('Login')
-    props.clearState();
+handleMenu = (props) => {
+    props.navigation.navigate('Menu')
+    // props.clearState();
 }
 
 const TopHeader = (props) => {
@@ -18,7 +18,7 @@ const TopHeader = (props) => {
                 containerStyle = {{backgroundColor: '#0E82A7', height: 100}}
                 leftComponent = {props.currentFolderId? <BackBtn />: null}
                 centerComponent={{ text: props.headerText, style: { color: '#fff', fontSize: 30, fontWeight: 'bold'} }}
-                rightComponent = {<Text onPress={()=>handleLogOut(props)} style={{ color: 'white',fontSize:20}}>Log Out</Text>}
+                rightComponent = {<Text onPress={()=>handleMenu(props)} style={{ color: 'white',fontSize:20}}>Log Out</Text>}
             />
         </View>
     )
