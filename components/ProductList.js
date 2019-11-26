@@ -10,7 +10,7 @@ const handleDelete = (props) => {
     const newProducts = props.parent_folder.products.filter(p => p.id !== props.product.id)
     props.setParentFolder({...props.parent_folder,products: newProducts});
     // console.log("Parent Folder===> ", props.parent_folder)
-    fetch("http://10.0.2.2:3000/api/v1/products/"+props.product.id,{
+    fetch("http://localhost/api/v1/products/"+props.product.id,{
         method: "DELETE",
         headers: {
             "Content-Type": "application/json",
@@ -18,7 +18,7 @@ const handleDelete = (props) => {
         }
     }).then(()=>console.log("After Fetchinging....."))
     
-        fetch("http://10.0.2.2:3000/api/v1/users/"+props.user.id)
+        fetch("http://localhost/api/v1/users/"+props.user.id)
         .then(resp => resp.json())
         .then((user)=>{
             props.setUser(user)
@@ -35,10 +35,10 @@ const ProductList = (props) => {
             />
             <TouchableOpacity>
             <View style = {styles.description} >
-                <Text style = {styles.folderName}>{props.product.name}</Text>
-                <Text style = {styles.folderDes}>Qty: {props.product.quantity} | $ {props.product.price * props.product.quantity}</Text>
-                <Text style = {styles.folderDes}>Description: {props.product.description}</Text>
-                <Text style = {styles.folderDes}>Note: {props.product.note}</Text>
+                <Text style = {styles.productName}>{props.product.name}</Text>
+                <Text style = {styles.productDesc}>Qty: {props.product.quantity} | $ {props.product.price * props.product.quantity}</Text>
+                <Text style = {styles.description}>Description: {props.product.description}</Text>
+                <Text style = {styles.productDesc}>Note: {props.product.note}</Text>
             </View>
             </TouchableOpacity>
             <View  style={{alignSelf:'flex-start', marginRight: 20}}>
@@ -60,16 +60,18 @@ const styles = StyleSheet.create({
     },
     description: {
         flex: 1,
-        marginLeft: 10,
+        marginLeft: 5,
         borderTopWidth: 1,
         borderTopColor: 'rgb(223, 228, 232)'
     },
-    folderName: {
+    productName: {
+        fontSize: 20,
         fontWeight: 'bold',
         margin:2
     },
-    folderDes: {
-        margin: 2
+    productDesc: {
+        fontWeight: 'bold',
+        marginLeft: 5
     }
 })
 

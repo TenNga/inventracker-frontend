@@ -20,7 +20,7 @@ class SignUp extends Component {
     }
 
     handleSignup = () => { //handle fetch request
-        fetch("http://10.0.2.2:3000/api/v1/users",{
+        fetch("http://localhost/api/v1/users",{
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

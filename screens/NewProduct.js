@@ -33,7 +33,7 @@ class NewProduct extends Component {
         if(this.state.image==="")
             this.setState({image: "http://www.premiumlogistics-sl.com/wp-content/uploads/2015/07/products-corrugated-stock-boxes-shipping-kraft-shorr-packaging_0.jpg"})
             
-        fetch("http://10.0.2.2:3000/api/v1/products",{
+        fetch("http://localhost/api/v1/products",{
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -45,7 +45,7 @@ class NewProduct extends Component {
         .then(product => this.props.updateCurrentProduct(product))
         .then(()=>this.props.navigation.navigate('Home'))
 
-        fetch("http://10.0.2.2:3000/api/v1/users/"+this.props.user.id)
+        fetch("http://localhost/api/v1/users/"+this.props.user.id)
         .then(resp => resp.json())
         .then((user)=>{
             this.props.setUser(user)
@@ -53,46 +53,51 @@ class NewProduct extends Component {
     }
     render(){
         return(
-            <View>
+            <View >
                 <Header 
                 containerStyle = {{backgroundColor: '#0E82A7', height: 100}}
                 leftComponent = {this.randerBack}
-                centerComponent={{ text: "New Folder", style: { color: '#fff', fontSize: 30, fontWeight: 'bold'} }}
-                rightComponent = {{icon: 'menu', color: 'white', size: 40}}
+                centerComponent={{ text: "New Product", style: { color: '#fff', fontSize: 30, fontWeight: 'bold'} }}
                 />
-                <View>
+                <View style={styles.formContainer}>
                     <Text>Product name</Text>
-                    <TextInput 
+                    <TextInput
+                        style={styles.input} 
                         placeholder="Folder Name" 
                         onChangeText={(v)=>this.handleChange("name",v)} 
                         value={this.state.name}
                     />
                     <Text>Product Image</Text>
-                    <TextInput 
+                    <TextInput
+                        style={styles.input} 
                         placeholder="Folder Image" 
                         onChangeText={(v)=>this.handleChange("image",v)} 
                         value={this.state.image}
                     />
                     <Text>Product Quantity</Text>
-                    <TextInput 
+                    <TextInput
+                        style={styles.input} 
                         placeholder="Quantity" 
                         onChangeText={(v)=>this.handleChange("quantity",v)} 
                         value={this.state.quantity.toString()}
                     />
                     <Text>Product Price</Text>
-                    <TextInput 
+                    <TextInput
+                        style={styles.input} 
                         placeholder="Price" 
                         onChangeText={(v)=>this.handleChange("price",v)} 
                         value={this.state.price.toString()}
                     />
                     <Text>Product Description</Text>
-                    <TextInput 
+                    <TextInput
+                        style={styles.input} 
                         placeholder="Desciption" 
                         onChangeText={(v)=>this.handleChange("description",v)} 
                         value={this.state.description}
                     />
                     <Text>Product Note</Text>
-                    <TextInput 
+                    <TextInput
+                        style={styles.input} 
                         placeholder="Note" 
                         onChangeText={(v)=>this.handleChange("note",v)} 
                         value={this.state.note}
@@ -105,7 +110,18 @@ class NewProduct extends Component {
     
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+    formContainer: {
+        margin: 10
+    },
+    input: {
+        backgroundColor: 'rgb(242, 246, 247)',
+        paddingLeft: 5,
+        marginVertical: 10,
+        height: 35,
+        borderRadius: 5
+    }
+});
 
 mapStateToProps = (state) => {
     return{

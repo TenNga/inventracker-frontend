@@ -1,23 +1,39 @@
 import React, { Component } from 'react';
 import { Text, TextInput, View, StyleSheet } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { connect } from 'react-redux';
+import { setCurrentFolder } from '../actions'
 
 class SearchBar extends Component {
     state = { 
-        term: ""
+        term: "",
+        result: ""
     }
     handleChange = (term) => {
         this.setState({term})
     }
+
+    handleSubmit = () =>{
+        fetch("http://localhost/api/v1/folders")
+        .then(res => res.json())
+        .then((folders)=>{
+            const match = folders.filter(f => f.name.includes(this.state.term))
+            this.props.setCurrentFolder(match)
+        })
+      
+    }
+
     render(){
         return(
             <View style={styles.searchField}>
                 <View style={styles.input}>
                      <Ionicons name="md-search" size={32} color="white" style={styles.searchIcon} />
                     <TextInput
-                        placeholder={"Search Item"}
+                        placeholder={"Search Folder"}
                         onChangeText={this.handleChange}
                         value={this.state.term}
+                        onSubmitEditing = {this.handleSubmit}
+                        style={{flex:1}}
                     />
                 </View>
             </View>
@@ -51,4 +67,10 @@ const styles = StyleSheet.create({
     }
 })
 
-export default SearchBar;
+mapStateToProps = (state) => {
+    return {
+        allFolders: state.user.folders
+    }
+}
+
+export default connect(mapStateToProps, { setCurrentFolder})(SearchBar);

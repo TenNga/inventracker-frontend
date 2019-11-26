@@ -9,7 +9,7 @@ import { Ionicons } from '@expo/vector-icons';
 class FolderContainer extends Component {
 
     fetchUser = () => {
-        fetch("http://10.0.2.2:3000/api/v1/users/"+this.props.currentUser.id)
+        fetch("http://localhost:3000/api/v1/users/"+this.props.currentUser.id)
         .then(resp => resp.json())
         .then((user)=>{
             this.props.setUser(user)
@@ -44,7 +44,10 @@ class FolderContainer extends Component {
                     
                     {this.props.parent_folder.products && this.props.parent_folder.products.length? 
                     <View>
-                        <Text style = {{fontSize: 18, textTransform: 'uppercase'}}>products</Text>
+                        <Text style = {{fontSize: 18, textTransform: 'uppercase'}}>
+                            <Ionicons name="ios-cube" size={30} color="#0E82A7" />
+                            products
+                            </Text>
                         <FlatList 
                             data={this.props.parent_folder.products}
                             renderItem = {({item})=> <ProductList product={item} />}

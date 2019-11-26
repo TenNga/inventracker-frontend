@@ -5,7 +5,6 @@ import {
     StyleSheet} from 'react-native';
 import TopHeader from '../components/TopHeader';
 import SearchBar from '../components/SearchBar';
-import { connect } from 'react-redux';
 import BottomFooter from '../components/BottomFooter';
 import FolderContainer from '../container/FolderContainer';
 
@@ -17,7 +16,8 @@ const Landing = (props) => {
                 <SearchBar />
             </View>
             <View style={styles.mainContainer}>
-                <FolderContainer />
+                
+                    <FolderContainer />
             </View>
             <View style={styles.footer}>
                 <BottomFooter />

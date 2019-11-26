@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { createAppContainer} from 'react-navigation';
-import { createDrawerNavigator } from 'react-navigation-drawer';
+// import { createDrawerNavigator } from 'react-navigation-drawer';
 import { createStackNavigator } from 'react-navigation-stack';
 import Login from './screens/Login';
 import Signup from './screens/Signup';
 import Landing from './screens/Landing';
 import NewFolder from './screens/NewFolder';
 import NewProduct from './screens/NewProduct';
+import ImagePicker from './screens/ImagePick';
 import reducer from './reducers';
 import { Provider} from 'react-redux';
 import { createStore } from 'redux';
@@ -34,6 +35,9 @@ const navigator = createStackNavigator(
     },
     NewProduct: {
       screen: NewProduct
+    },
+    ImagePicker: {
+      screen: ImagePicker
     }
   },
   {

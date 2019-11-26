@@ -22,7 +22,7 @@ const FolderList = (props) => {
         console.log("after filter size: ", newFolders.length)
         props.setCurrentFolder(newFolders);
         // console.log("Current Folder==> ", current_folders)
-        fetch("http://10.0.2.2:3000/api/v1/folders/"+props.folderInfo.id,{
+        fetch("http://localhost:3000/api/v1/folders/"+props.folderInfo.id,{
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json",
@@ -30,7 +30,7 @@ const FolderList = (props) => {
             }
         }).then(()=>console.log("After Fetchinging....."))
         
-        fetch("http://10.0.2.2:3000/api/v1/users/"+props.user.id)
+        fetch("http://localhost:3000/api/v1/users/"+props.user.id)
         .then(resp => resp.json())
         .then((user)=>{
             props.setUser(user)
@@ -47,7 +47,7 @@ const FolderList = (props) => {
                 <TouchableOpacity style={{flex:1}} onPress={handleFolderSelection}>
                 <View style = {styles.description} >
                     <Text style = {styles.folderName}>{props.folderInfo.name}</Text>
-                    <Text style = {styles.folderDes}>Qty: xxx | Sub: {props.folderInfo.folders.length} | $xxx</Text>
+                    <Text style = {styles.folderDes}>Sub-Folder: {props.folderInfo.folders.length}</Text>
                 </View>
                 </TouchableOpacity>
                 <View  style={{alignSelf:'flex-start', marginRight: 20}}>
@@ -74,6 +74,7 @@ const styles = StyleSheet.create({
         borderTopColor: 'rgb(223, 228, 232)'
     },
     folderName: {
+        fontSize: 20,
         fontWeight: 'bold',
         margin:2
     },

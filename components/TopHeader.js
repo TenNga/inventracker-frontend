@@ -17,7 +17,7 @@ const TopHeader = (props) => {
              <Header 
                 containerStyle = {{backgroundColor: '#0E82A7', height: 100}}
                 leftComponent = {props.currentFolderId? <BackBtn />: null}
-                centerComponent={{ text: props.headerText, style: { color: '#fff', fontSize: 40, fontWeight: 'bold'} }}
+                centerComponent={{ text: props.headerText, style: { color: '#fff', fontSize: 30, fontWeight: 'bold'} }}
                 rightComponent = {<Text onPress={()=>handleLogOut(props)} style={{ color: 'white',fontSize:20}}>Log Out</Text>}
             />
         </View>

@@ -4,15 +4,16 @@ import {
     View, 
     StyleSheet, 
     TextInput, 
-    Alert} from 'react-native';
+    Alert,
+    ImageBackground} from 'react-native';
 import { setUser } from '../actions';
 import { connect } from 'react-redux';
 import { Header } from 'react-native-elements';
 
 class Login extends Component {
     state = {
-        user_name: "",
-        password: ""
+        user_name: "kk",
+        password: "123"
     }
 
     handleUsername = (text) => {
@@ -23,7 +24,7 @@ class Login extends Component {
     }
 
     handleLogin = () => {
-        fetch("http://10.0.2.2:3000/api/v1/login",{
+        fetch("http://localhost:3000/api/v1/login",{
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -48,9 +49,10 @@ class Login extends Component {
 
     render(){
         return(
-        <View style={styles.container}>
+            <View style={styles.container}>
+                <ImageBackground source={require('../assets/Background.png')} style={{position: 'absolute', top: 0, right: 0,bottom: 0, left: 0}}>
             <Header 
-            containerStyle = {{backgroundColor: '#0E82A7'}}
+            containerStyle = {{backgroundColor: 'rgb(93, 180, 227)'}}
             centerComponent={{ text: 'Welcome', style: { color: '#fff', fontSize: 30} }}
             />
             <View style={styles.formContainer}>
@@ -71,6 +73,7 @@ class Login extends Component {
                     value={this.state.password}
                     secureTextEntry 
                     style={styles.input}
+                    onSubmitEditing={this.handleLogin}
                 />
                 <View style={styles.userInfo}>
                     <Text style={{  fontSize: 23, color: 'white' }} onPress={this.handleLogin} >
@@ -85,6 +88,7 @@ class Login extends Component {
                     </Text>
                 </Text>
             </View>
+            </ImageBackground>
             <View style = {styles.footer}>
                 <Text style={{flex:1,textAlign: 'center',marginVertical: 30, color: 'white'}}>Copy Right @ InvenTracker 2019</Text>
             </View>
@@ -96,7 +100,7 @@ class Login extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: 'rgba(12, 130, 167, 0.8)'
+        // backgroundColor: 'rgba(12, 130, 167, 0.8)'
     },
     formContainer: {
         top:30,
@@ -123,7 +127,7 @@ const styles = StyleSheet.create({
     footer: {
         position: 'absolute',
         height: 80,
-        backgroundColor: '#0E82A7',
+        // backgroundColor: '#0E82A7',
         left: 0,
         right: 0,
         bottom: 0
