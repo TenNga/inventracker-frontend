@@ -19,6 +19,8 @@ function reducer(prevState = defaultState, action){
             return { ...prevState, parent_folder: action.payload }
         case "UPDATE_CURRENT_FOLDER":
             return { ...prevState, current_folders: [...prevState.current_folders, action.payload]}
+        case "UPDATE_PRODUCT":
+            return { ...prevState, parent_folder: {...prevState.parent_folder, products: [...prevState.parent_folder.products, action.payload]}}
         case "CLEAR_STATE":
             return{...prevState,
                 user: "",

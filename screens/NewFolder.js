@@ -8,7 +8,7 @@ import {Text,
 } from 'react-native';
 import { Header } from 'react-native-elements';
 import { withNavigation } from 'react-navigation';
-import { updateCurrentFolder } from '../actions';
+import { updateCurrentFolder, setUser } from '../actions';
 import { connect } from 'react-redux';
 
 class NewFolder extends Component {
@@ -31,6 +31,7 @@ class NewFolder extends Component {
     handleSave = () => {
         // console.log("Current Folder ID: ",this.props.folder_id)
         // console.log("Current User ID: ",this.props.user_id)
+        
         fetch("http://10.0.2.2:3000/api/v1/folders",{
             method: "POST",
             headers: {
@@ -42,6 +43,12 @@ class NewFolder extends Component {
         .then(res => res.json())
         .then(folder => this.props.updateCurrentFolder(folder))
         .then(()=>this.props.navigation.navigate('Home'))
+
+        fetch("http://10.0.2.2:3000/api/v1/users/"+this.props.user.id)
+        .then(resp => resp.json())
+        .then((user)=>{
+            this.props.setUser(user)
+        })
     }
     render(){
         return(
@@ -65,7 +72,7 @@ class NewFolder extends Component {
             </View>
         )
     }
-}
+}//Class
 
 const styles = StyleSheet.create({
     input: {
@@ -79,10 +86,11 @@ const styles = StyleSheet.create({
 
 mapStateToProps = (state) => {
     return{
+        user: state.user,
         folder_id: state.current_folder_id,
         user_id: state.user.id
     }
 }
 
 
-export default connect(mapStateToProps, {updateCurrentFolder})(withNavigation(NewFolder));
+export default connect(mapStateToProps, {updateCurrentFolder,setUser})(withNavigation(NewFolder));

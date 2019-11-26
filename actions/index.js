@@ -19,6 +19,9 @@ export function setParentFolder(folder){
 export function updateCurrentFolder(folder) {
     return{ type: "UPDATE_CURRENT_FOLDER", payload: folder}
 }
+export function updateCurrentProduct(product) {
+    return { type: "UPDATE_PRODUCT", payload: product}
+}
 export function clearState(){
     return{ type: "CLEAR_STATE"}
 }

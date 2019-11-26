@@ -20,8 +20,6 @@ class SearchBar extends Component {
                         value={this.state.term}
                     />
                 </View>
-                    
-               
             </View>
         )
     }

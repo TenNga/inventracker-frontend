@@ -6,6 +6,7 @@ import Login from './screens/Login';
 import Signup from './screens/Signup';
 import Landing from './screens/Landing';
 import NewFolder from './screens/NewFolder';
+import NewProduct from './screens/NewProduct';
 import reducer from './reducers';
 import { Provider} from 'react-redux';
 import { createStore } from 'redux';
@@ -30,6 +31,9 @@ const navigator = createStackNavigator(
     },
     NewFolder: {
       screen: NewFolder
+    },
+    NewProduct: {
+      screen: NewProduct
     }
   },
   {

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, FlatList, StyleSheet } from 'react-native';
+import { View, Text, FlatList, StyleSheet, ActivityIndicator } from 'react-native';
 import FolderList from '../components/FolderList';
 import { setCurrentFolder, setUser } from '../actions';
 import { connect } from 'react-redux';
@@ -22,16 +22,18 @@ class FolderContainer extends Component {
     }
 
     render(){
-        // console.log("Rendering Landing Page.........")
+        console.log("Rendering Landing Page.........")
+        // console.log("Producte Length/Size: ", this.props.parent_folder.products)
         // console.log("Current Folder ID: ", this.props.current_folder_id)
-        // console.log("Current Folders: ", this.props.current_folders.length)
+        console.log("Current Folders: ", this.props.current_folders.length)
         // console.log("Current User Infomation=============>: ", this.props.currentUser)
         return(
             <View style={styles.mainFolderContainer}>
                 {this.props.current_folders && this.props.current_folders.length? 
                 <View>
                     <Text style = {{fontSize: 18, textTransform: 'uppercase'}}>
-                         <Ionicons name="ios-folder-open" size={30} color="#0E82A7" />Folder
+                         <Ionicons name="ios-folder-open" size={30} color="#0E82A7" />
+                        {this.props.parent_folder.name? this.props.parent_folder.name : "Folder"}
                     </Text>
                         <FlatList 
                             data={this.props.current_folders}
@@ -39,7 +41,7 @@ class FolderContainer extends Component {
                             keyExtractor={item=>item.id.toString()}
                         /> 
                 </View> : null }
-
+                    
                     {this.props.parent_folder.products && this.props.parent_folder.products.length? 
                     <View>
                         <Text style = {{fontSize: 18, textTransform: 'uppercase'}}>products</Text>
@@ -49,6 +51,7 @@ class FolderContainer extends Component {
                             keyExtractor = {item => item.id.toString()}
                         />
                     </View> : null }
+                    
             </View>
         )
     }

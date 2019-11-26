@@ -10,7 +10,13 @@ const AddOption = (props) => {
                     props.handleClicked()
                     props.navigation.navigate('NewFolder')
                 }} style={styles.optionBtn}>FOLDER</Text>
-                <Text style={styles.optionBtn}>PRODUCT</Text>
+                <Text onPress={()=> {
+                    props.handleClicked();
+                    props.navigation.navigate('NewProduct');
+                }} 
+                    style={styles.optionBtn}>
+                    PRODUCT
+                </Text>
             </View>
             <View style={styles.cancelBtn}>
                 <Text onPress ={props.handleClicked} style={styles.cancelBtnText}>CANCEL</Text>
