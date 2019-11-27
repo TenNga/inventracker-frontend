@@ -18,30 +18,22 @@ class SignUp extends Component {
             first_name: "",
             last_name: "",
             password: ""
-        },
-        color: "rgb(242, 246, 247)"
+        }
 
 }
 
     handleSignup = () => { //handle fetch request
-        fetch("http://localhost/api/v1/users",{
+        fetch("http://localhost:3000/api/v1/users",{
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
                 "Accepts": "application/json"
             },
-            body: JSON.stringify(this.state.user)
+            body: JSON.stringify(this.state)
         })
         .then(res => res.json())
         .then(user=>this.props.setUser(user))
         .then(()=>this.props.navigation.navigate('Home'))
-    }
-
-    handlePasswordColor = () => {
-        if(this.state.user.password.length < 6)
-            this.setState({color: "red"})
-        else if(this.state.user.password.length > 6)
-            this.setState({color: "green"})
     }
 
     render(){
@@ -76,8 +68,9 @@ class SignUp extends Component {
                 />
             <TextInput 
                 placeholder="Password" 
+                autoCapitalize="none"
                 onChangeText={(v)=>{
-                    this.setState({password: v},this.handlePasswordColor());
+                    this.setState({password: v});
                     
                 }}
                 value={this.state.password}

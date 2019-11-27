@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { setCurrentFolder } from '../actions'
 
 class SearchBar extends Component {
+    
     state = { 
         term: "",
         result: ""
@@ -14,16 +15,17 @@ class SearchBar extends Component {
     }
 
     handleSubmit = () =>{
+        
         fetch("http://localhost:3000/api/v1/folders")
         .then(res => res.json())
         .then((folders)=>{
             const match = folders.filter(f => f.name.includes(this.state.term))
             this.props.setCurrentFolder(match)
         })
-      
     }
 
     render(){
+        console.log("Term:==> ",this.state.term)
         return(
             <View style={styles.searchField}>
                 <View style={styles.input}>

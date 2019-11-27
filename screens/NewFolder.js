@@ -32,7 +32,7 @@ class NewFolder extends Component {
         // console.log("Current Folder ID: ",this.props.folder_id)
         // console.log("Current User ID: ",this.props.user_id)
         
-        fetch("http://10.0.2.2:3000/api/v1/folders",{
+        fetch("http://localhost:3000/api/v1/folders",{
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -44,7 +44,7 @@ class NewFolder extends Component {
         .then(folder => this.props.updateCurrentFolder(folder))
         .then(()=>this.props.navigation.navigate('Home'))
 
-        fetch("http://10.0.2.2:3000/api/v1/users/"+this.props.user.id)
+        fetch("http://localhost:3000/api/v1/users/"+this.props.user.id)
         .then(resp => resp.json())
         .then((user)=>{
             this.props.setUser(user)

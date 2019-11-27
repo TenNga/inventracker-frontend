@@ -5,6 +5,7 @@ import BackBtn from '../components/BackBtn';
 import { connect } from 'react-redux';
 import { withNavigation } from 'react-navigation';
 import { clearState } from '../actions';
+import { Ionicons } from '@expo/vector-icons';
 
 handleMenu = (props) => {
     props.navigation.navigate('Menu')
@@ -18,7 +19,7 @@ const TopHeader = (props) => {
                 containerStyle = {{backgroundColor: '#0E82A7', height: 100}}
                 leftComponent = {props.currentFolderId? <BackBtn />: null}
                 centerComponent={{ text: props.headerText, style: { color: '#fff', fontSize: 30, fontWeight: 'bold'} }}
-                rightComponent = {<Text onPress={()=>handleMenu(props)} style={{ color: 'white',fontSize:20}}>Log Out</Text>}
+                rightComponent = {<Text onPress={()=>props.navigation.navigate('Menu')}><Ionicons  name="ios-menu" size={30} color="white" /></Text>}
             />
         </View>
     )

@@ -73,6 +73,7 @@ class Login extends Component {
                     value={this.state.password}
                     secureTextEntry 
                     style={styles.input}
+                    autoCapitalize="none"
                     onSubmitEditing={this.handleLogin}
                 />
                 <View style={styles.userInfo}>
@@ -90,7 +91,9 @@ class Login extends Component {
             </View>
             </ImageBackground>
             <View style = {styles.footer}>
-                <Text style={{flex:1,textAlign: 'center',marginVertical: 30, color: 'white'}}>Copy Right @ InvenTracker 2019</Text>
+                <Text style={{flex:1,textAlign: 'center',marginVertical: 30, color: 'white'}}>
+                    Flatiron Scool - InvenTracker 2019
+                </Text>
             </View>
         </View>
         )
@@ -118,6 +121,8 @@ const styles = StyleSheet.create({
         marginVertical: 10
     },
     input: {
+        fontSize:25,
+        color: '#5e5b5b',
         backgroundColor: 'rgb(242, 246, 247)',
         paddingLeft: 5,
         marginVertical: 10,
