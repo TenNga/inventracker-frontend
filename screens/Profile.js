@@ -3,7 +3,7 @@ import { Text, View, StyleSheet, Image} from 'react-native';
 import { Header } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { withNavigation } from 'react-navigation';
-
+import { Ionicons } from '@expo/vector-icons';
 
 const Profile = ({user,navigation}) => {
     // console.log("WHOLE STATE ======> ",props)
@@ -12,7 +12,8 @@ const Profile = ({user,navigation}) => {
             <Header 
                 containerStyle = {{backgroundColor: '#0E82A7', height: 100}}
                 centerComponent={{ text: "Profile", style: { color: '#fff', fontSize: 30, fontWeight: 'bold'} }}
-                rightComponent={<Text onPress={()=>navigation.navigate('Menu')} style={{ color: 'white',fontSize:20}}>X</Text>}
+                // rightComponent={<Text onPress={()=>navigation.navigate('Menu')} style={{ color: 'white',fontSize:20}}>X</Text>}
+                rightComponent={<Text onPress={()=>navigation.navigate('Home')}><Ionicons  name="ios-close-circle-outline" size={30} color="white" /></Text>}
                 // rightComponent = {{icon: 'menu', color: 'white', size: 40}}
             />
             <View style={styles.container}>

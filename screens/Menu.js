@@ -34,12 +34,12 @@ const Contact = (props) => {
 
 const styles = StyleSheet.create({
     container:{
-        flex: 1,
-        // backgroundColor: '#0E82A7',
-        alignItems: 'center',
-        justifyContent: 'flex-start'
+        flex: 1
     },
     menuText: {
+        textAlign: 'center',
+        alignSelf: 'stretch',
+        justifyContent: 'flex-start',
         paddingBottom: 10,
         borderBottomWidth: 2,
         borderBottomColor: "#1b90b5",
