@@ -7,7 +7,7 @@ import Signup from './screens/Signup';
 import Landing from './screens/Landing';
 import NewFolder from './screens/NewFolder';
 import NewProduct from './screens/NewProduct';
-// import ImagePicker from './screens/ImagePick';
+import ImagePick from './screens/ImagePick';
 import Profile from './screens/Profile';
 import Contact from './screens/Contact';
 import Menu from './screens/Menu';
@@ -48,6 +48,9 @@ const navigator = createStackNavigator(
     }, 
     Menu: {
       screen: Menu,
+    },
+    ImagePick: {
+      screen: ImagePick
     }
   },
   {

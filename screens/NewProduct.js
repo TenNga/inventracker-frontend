@@ -1,9 +1,17 @@
 import React, { Component } from 'react';
-import { Text, View, StyleSheet, TouchableOpacity, TextInput, Button } from 'react-native';
+import { 
+    Text, 
+    View, 
+    StyleSheet, 
+    TouchableOpacity, 
+    TextInput, 
+    Button,
+    KeyboardAvoidingView} from 'react-native';
 import { Header } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { updateCurrentProduct, setUser } from '../actions';
 import { withNavigation } from 'react-navigation';
+import ImagePick from './ImagePick';
 
 class NewProduct extends Component {
     state ={
@@ -27,13 +35,22 @@ class NewProduct extends Component {
         )
     }
 
+    checkForEmpty = () => {
+        if(this.state.name === "")
+            this.setState({name: "New Product"})
+        if(this.state.description === "")
+            this.setState({description: "No description added"})
+        if(this.state.note === "")
+            this.setState({note: "No note added"})
+    }
+
     handleSave = () => {
-        // console.log("Current Folder ID: ",this.props.folder_id)
-        // console.log("Current User ID: ",this.props.user_id)
-        if(this.state.image==="")
-            this.setState({image: "http://www.premiumlogistics-sl.com/wp-content/uploads/2015/07/products-corrugated-stock-boxes-shipping-kraft-shorr-packaging_0.jpg"})
+      
+        this.checkForEmpty();
+        // if(this.state.image==="")
+        //     this.setState({image: "http://www.premiumlogistics-sl.com/wp-content/uploads/2015/07/products-corrugated-stock-boxes-shipping-kraft-shorr-packaging_0.jpg"})
             
-        fetch("http://localhost/api/v1/products",{
+        fetch("http://localhost:3000/api/v1/products",{
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -45,14 +62,20 @@ class NewProduct extends Component {
         .then(product => this.props.updateCurrentProduct(product))
         .then(()=>this.props.navigation.navigate('Home'))
 
-        fetch("http://localhost/api/v1/users/"+this.props.user.id)
+        fetch("http://localhost:3000/api/v1/users/"+this.props.user.id)
         .then(resp => resp.json())
         .then((user)=>{
             this.props.setUser(user)
         })
     }
+
+    handleImageUrl = (url) => {
+        this.setState({image: url})
+    }
     render(){
         return(
+            
+                <KeyboardAvoidingView behavior="position">
             <View >
                 <Header 
                 containerStyle = {{backgroundColor: '#0E82A7', height: 100}}
@@ -60,42 +83,45 @@ class NewProduct extends Component {
                 centerComponent={{ text: "New Product", style: { color: '#fff', fontSize: 30, fontWeight: 'bold'} }}
                 />
                 <View style={styles.formContainer}>
-                    <Text>Product name</Text>
+                    <Text style={styles.inputTitle}>Product name</Text>
                     <TextInput
                         style={styles.input} 
-                        placeholder="Folder Name" 
+                        placeholder="Product Name" 
                         onChangeText={(v)=>this.handleChange("name",v)} 
                         value={this.state.name}
                     />
-                    <Text>Product Image</Text>
-                    <TextInput
+                    <Text style={styles.inputTitle}>Product Image</Text>
+                    {/* <TextInput
                         style={styles.input} 
-                        placeholder="Folder Image" 
+                        placeholder="Product Image" 
                         onChangeText={(v)=>this.handleChange("image",v)} 
                         value={this.state.image}
-                    />
-                    <Text>Product Quantity</Text>
+                    /> */}
+                    <View><ImagePick handleImageUrl={this.handleImageUrl}/></View>
+                    <Text style={styles.inputTitle}>Product Quantity</Text>
                     <TextInput
                         style={styles.input} 
                         placeholder="Quantity" 
                         onChangeText={(v)=>this.handleChange("quantity",v)} 
                         value={this.state.quantity.toString()}
+                        onFocus={()=>this.setState({quantity: ""})}
                     />
-                    <Text>Product Price</Text>
+                    <Text style={styles.inputTitle}>Product Price</Text>
                     <TextInput
                         style={styles.input} 
                         placeholder="Price" 
                         onChangeText={(v)=>this.handleChange("price",v)} 
                         value={this.state.price.toString()}
+                        onFocus={()=>this.setState({price: ""})}
                     />
-                    <Text>Product Description</Text>
+                    <Text style={styles.inputTitle}>Product Description</Text>
                     <TextInput
                         style={styles.input} 
                         placeholder="Desciption" 
                         onChangeText={(v)=>this.handleChange("description",v)} 
                         value={this.state.description}
                     />
-                    <Text>Product Note</Text>
+                    <Text style={styles.inputTitle}>Product Note</Text>
                     <TextInput
                         style={styles.input} 
                         placeholder="Note" 
@@ -105,6 +131,7 @@ class NewProduct extends Component {
                     <Button title="Save" onPress={this.handleSave} />
                 </View>
             </View>
+            </KeyboardAvoidingView>
         )
     }
     
@@ -115,11 +142,17 @@ const styles = StyleSheet.create({
         margin: 10
     },
     input: {
+        fontSize: 20,
         backgroundColor: 'rgb(242, 246, 247)',
         paddingLeft: 5,
         marginVertical: 10,
         height: 35,
         borderRadius: 5
+    },
+    inputTitle: {
+        color: '#0E82A7',
+        fontSize: 20,
+        fontWeight: 'bold'
     }
 });
 

@@ -77,7 +77,7 @@ class Login extends Component {
                     onSubmitEditing={this.handleLogin}
                 />
                 <View style={styles.userInfo}>
-                    <Text style={{  fontSize: 23, color: 'white' }} onPress={this.handleLogin} >
+                    <Text style={{ fontSize: 23, color: 'white' }} onPress={this.handleLogin} >
                         Sign In
                     </Text>
                 </View>
