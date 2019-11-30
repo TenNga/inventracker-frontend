@@ -7,10 +7,10 @@ import Signup from './screens/Signup';
 import Landing from './screens/Landing';
 import NewFolder from './screens/NewFolder';
 import NewProduct from './screens/NewProduct';
-import ImagePick from './screens/ImagePick';
 import Profile from './screens/Profile';
 import Contact from './screens/Contact';
 import Menu from './screens/Menu';
+import QRCodeGenerator from './screens/QRCodeGenerator';
 
 import reducer from './reducers';
 import { Provider} from 'react-redux';
@@ -49,8 +49,8 @@ const navigator = createStackNavigator(
     Menu: {
       screen: Menu,
     },
-    ImagePick: {
-      screen: ImagePick
+    QRCodeGenerator: {
+      screen: QRCodeGenerator,
     }
   },
   {

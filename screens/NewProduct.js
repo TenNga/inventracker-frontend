@@ -11,7 +11,7 @@ import { Header } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { updateCurrentProduct, setUser } from '../actions';
 import { withNavigation } from 'react-navigation';
-import ImagePick from './ImagePick';
+import ImagePick from '../components/ImagePick';
 
 class NewProduct extends Component {
     state ={
@@ -74,8 +74,7 @@ class NewProduct extends Component {
     }
     render(){
         return(
-            
-                <KeyboardAvoidingView behavior="position">
+            <KeyboardAvoidingView behavior="position">
             <View >
                 <Header 
                 containerStyle = {{backgroundColor: '#0E82A7', height: 100}}
