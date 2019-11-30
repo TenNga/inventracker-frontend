@@ -22,6 +22,9 @@ export function updateCurrentFolder(folder) {
 export function updateCurrentProduct(product) {
     return { type: "UPDATE_PRODUCT", payload: product}
 }
+export function setProductQr(id){
+    return { type: "SET_PRODUCT_QR", payload: id}
+}
 export function clearState(){
     return{ type: "CLEAR_STATE"}
 }

@@ -12,6 +12,7 @@ import { connect } from 'react-redux';
 import { updateCurrentProduct, setUser } from '../actions';
 import { withNavigation } from 'react-navigation';
 import ImagePick from '../components/ImagePick';
+import QRCodeGenerator from '../components/QRCodeGenerator';
 
 class NewProduct extends Component {
     state ={
@@ -21,7 +22,8 @@ class NewProduct extends Component {
         price: 0,
         description: "",
         note: "",
-        folder_id: this.props.folder_id
+        folder_id: this.props.folder_id,
+        qr_id: this.props.qr_id? this.props.qr_id : ""
     }
     handleChange = (name,value) => {
         this.setState({[name]: value})
@@ -47,6 +49,7 @@ class NewProduct extends Component {
     handleSave = () => {
       
         this.checkForEmpty();
+        this.setState({qr_id: this.props.qr_id})
         // if(this.state.image==="")
         //     this.setState({image: "http://www.premiumlogistics-sl.com/wp-content/uploads/2015/07/products-corrugated-stock-boxes-shipping-kraft-shorr-packaging_0.jpg"})
             
@@ -72,7 +75,14 @@ class NewProduct extends Component {
     handleImageUrl = (url) => {
         this.setState({image: url})
     }
+
+    handleLinkProduct = () => {
+        this.props.navigation.navigate('QRCodeGenerator')
+    }
     render(){
+        // console.log("QR ID: ",this.state.qr_id)
+        // console.log("QR ID FROM MAIN STATE: ",this.props.qr_id)
+        console.log("PRODUCT STATE, ", this.state)
         return(
             <KeyboardAvoidingView behavior="position">
             <View >
@@ -97,6 +107,8 @@ class NewProduct extends Component {
                         value={this.state.image}
                     /> */}
                     <View><ImagePick handleImageUrl={this.handleImageUrl}/></View>
+                    <Button title="LINK ORCODE" onPress={this.handleLinkProduct} />
+
                     <Text style={styles.inputTitle}>Product Quantity</Text>
                     <TextInput
                         style={styles.input} 
@@ -158,7 +170,8 @@ const styles = StyleSheet.create({
 mapStateToProps = (state) => {
     return{
         user: state.user,
-        folder_id: state.current_folder_id
+        folder_id: state.current_folder_id,
+        qr_id: state.product_qr
     }
 }
 

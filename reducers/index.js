@@ -2,7 +2,8 @@ const defaultState = {
     user: "",
     parent_folder: "",
     current_folder_id: null,
-    current_folders: []
+    current_folders: [],
+    product_qr: ""
 }
 
 function reducer(prevState = defaultState, action){
@@ -21,6 +22,8 @@ function reducer(prevState = defaultState, action){
             return { ...prevState, current_folders: [...prevState.current_folders, action.payload]}
         case "UPDATE_PRODUCT":
             return { ...prevState, parent_folder: {...prevState.parent_folder, products: [...prevState.parent_folder.products, action.payload]}}
+        case "SET_PRODUCT_QR":
+            return{...prevState, product_qr: action.payload}
         case "CLEAR_STATE":
             return{...prevState,
                 user: "",

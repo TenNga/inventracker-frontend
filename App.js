@@ -10,7 +10,7 @@ import NewProduct from './screens/NewProduct';
 import Profile from './screens/Profile';
 import Contact from './screens/Contact';
 import Menu from './screens/Menu';
-import QRCodeGenerator from './screens/QRCodeGenerator';
+import QRCodeGenerator from './components/QRCodeGenerator';
 
 import reducer from './reducers';
 import { Provider} from 'react-redux';

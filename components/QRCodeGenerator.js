@@ -2,8 +2,10 @@ import * as React from 'react';
 import { Text, View, StyleSheet, Button } from 'react-native';
 import * as Permissions from 'expo-permissions';
 import { BarCodeScanner } from 'expo-barcode-scanner';
+import { connect }from 'react-redux';
+import { setProductQr } from '../actions'
 
-export default class BarcodeScannerExample extends React.Component {
+class QRCodeGenerator extends React.Component {
   state = {
     hasCameraPermission: null,
     scanned: false,
@@ -49,5 +51,9 @@ export default class BarcodeScannerExample extends React.Component {
   handleBarCodeScanned = ({ type, data }) => {
     this.setState({ scanned: true });
     alert(`Bar code with type ${type} and data ${data} has been scanned!`);
+    this.props.setProductQr(data);
+    this.props.navigation.goBack();
   };
 }
+
+export default connect(null, {setProductQr})(QRCodeGenerator)
