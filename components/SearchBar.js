@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Text, TextInput, View, StyleSheet } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { connect } from 'react-redux';
-import { setCurrentFolder } from '../actions'
+import { setCurrentFolder, updateCurrentProduct } from '../actions'
 import { withNavigation } from 'react-navigation';
 
 class SearchBar extends Component {
@@ -30,13 +30,14 @@ class SearchBar extends Component {
         .then(res => res.json())
         .then((products)=>{
             const match = products.filter(p => p.qr_id === this.props.qr_id)
-            // this.props.setCurrentFolder(match)
+            // const folder = this.props.user.folders.find(f => f.id === match.folder_id)
+            this.props.updateCurrentProduct(match)
             console.log("Match Product:===> ", match)
         })
     }
 
     render(){
-        console.log("Search QR ID:==> ",this.props.qr_id)
+        // console.log("Search QR ID:==> ",this.props.qr_id)
         return(
             <View style={styles.searchField}>
                 <View style={styles.input}>
@@ -84,8 +85,9 @@ const styles = StyleSheet.create({
 mapStateToProps = (state) => {
     return {
         allFolders: state.user.folders,
-        qr_id: state.product_qr
+        qr_id: state.product_qr,
+        user: state.user
     }
 }
 
-export default connect(mapStateToProps, { setCurrentFolder})(withNavigation(SearchBar));
+export default connect(mapStateToProps, { setCurrentFolder, updateCurrentProduct})(withNavigation(SearchBar));

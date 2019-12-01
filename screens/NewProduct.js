@@ -62,7 +62,6 @@ class NewProduct extends Component {
                 .then(product => this.props.updateCurrentProduct(product))
                 .then(()=>this.props.navigation.navigate('Home'))
         )//setState 
-        
         fetch("http://localhost:3000/api/v1/users/"+this.props.user.id)
         .then(resp => resp.json())
         .then((user)=>{
