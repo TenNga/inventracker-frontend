@@ -3,12 +3,12 @@ import { Text, TextInput, View, StyleSheet } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { connect } from 'react-redux';
 import { setCurrentFolder } from '../actions'
+import { withNavigation } from 'react-navigation';
 
 class SearchBar extends Component {
     
     state = { 
-        term: "",
-        result: ""
+        term: ""
     }
     handleChange = (term) => {
         this.setState({term})
@@ -24,8 +24,19 @@ class SearchBar extends Component {
         })
     }
 
+     handleProductSearch = () => {
+        this.props.navigation.navigate('QRCodeGenerator')
+        fetch("http://localhost:3000/api/v1/products")
+        .then(res => res.json())
+        .then((products)=>{
+            const match = products.filter(p => p.qr_id === this.props.qr_id)
+            // this.props.setCurrentFolder(match)
+            console.log("Match Product:===> ", match)
+        })
+    }
+
     render(){
-        console.log("Term:==> ",this.state.term)
+        console.log("Search QR ID:==> ",this.props.qr_id)
         return(
             <View style={styles.searchField}>
                 <View style={styles.input}>
@@ -37,6 +48,7 @@ class SearchBar extends Component {
                         onSubmitEditing = {this.handleSubmit}
                         style={{flex:1}}
                     />
+                    <Text onPress={this.handleProductSearch}>Product</Text>
                 </View>
             </View>
         )
@@ -71,8 +83,9 @@ const styles = StyleSheet.create({
 
 mapStateToProps = (state) => {
     return {
-        allFolders: state.user.folders
+        allFolders: state.user.folders,
+        qr_id: state.product_qr
     }
 }
 
-export default connect(mapStateToProps, { setCurrentFolder})(SearchBar);
+export default connect(mapStateToProps, { setCurrentFolder})(withNavigation(SearchBar));

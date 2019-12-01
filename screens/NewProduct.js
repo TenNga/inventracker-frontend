@@ -46,25 +46,23 @@ class NewProduct extends Component {
             this.setState({note: "No note added"})
     }
 
-    handleSave = () => {
+    handleSave = (id) => {
       
         this.checkForEmpty();
-        this.setState({qr_id: this.props.qr_id})
-        // if(this.state.image==="")
-        //     this.setState({image: "http://www.premiumlogistics-sl.com/wp-content/uploads/2015/07/products-corrugated-stock-boxes-shipping-kraft-shorr-packaging_0.jpg"})
-            
-        fetch("http://localhost:3000/api/v1/products",{
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "Accepts": "application/json"
-            },
-            body: JSON.stringify(this.state)
-        })
-        .then(res => res.json())
-        .then(product => this.props.updateCurrentProduct(product))
-        .then(()=>this.props.navigation.navigate('Home'))
-
+        this.setState({qr_id: id.toString()},()=>
+                fetch("http://localhost:3000/api/v1/products",{
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Accepts": "application/json"
+                    },
+                    body: JSON.stringify(this.state)
+                })
+                .then(res => res.json())
+                .then(product => this.props.updateCurrentProduct(product))
+                .then(()=>this.props.navigation.navigate('Home'))
+        )//setState 
+        
         fetch("http://localhost:3000/api/v1/users/"+this.props.user.id)
         .then(resp => resp.json())
         .then((user)=>{
@@ -81,7 +79,7 @@ class NewProduct extends Component {
     }
     render(){
         // console.log("QR ID: ",this.state.qr_id)
-        // console.log("QR ID FROM MAIN STATE: ",this.props.qr_id)
+        console.log("QR ID FROM MAIN STATE: ",this.props.qr_id)
         console.log("PRODUCT STATE, ", this.state)
         return(
             <KeyboardAvoidingView behavior="position">
@@ -139,7 +137,7 @@ class NewProduct extends Component {
                         onChangeText={(v)=>this.handleChange("note",v)} 
                         value={this.state.note}
                     />
-                    <Button title="Save" onPress={this.handleSave} />
+                    <Button title="Save" onPress={()=>this.handleSave(this.props.qr_id)} />
                 </View>
             </View>
             </KeyboardAvoidingView>

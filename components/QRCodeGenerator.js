@@ -50,7 +50,7 @@ class QRCodeGenerator extends React.Component {
 
   handleBarCodeScanned = ({ type, data }) => {
     this.setState({ scanned: true });
-    alert(`Bar code with type ${type} and data ${data} has been scanned!`);
+    alert(`Bar Code ${data} has been scanned and added!`);
     this.props.setProductQr(data);
     this.props.navigation.goBack();
   };
