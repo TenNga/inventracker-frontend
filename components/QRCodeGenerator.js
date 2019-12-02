@@ -3,7 +3,7 @@ import { Text, View, StyleSheet, Button } from 'react-native';
 import * as Permissions from 'expo-permissions';
 import { BarCodeScanner } from 'expo-barcode-scanner';
 import { connect }from 'react-redux';
-import { setProductQr } from '../actions'
+import { setProductQr,setCurrentFolder } from '../actions'
 
 class QRCodeGenerator extends React.Component {
   state = {
@@ -48,12 +48,26 @@ class QRCodeGenerator extends React.Component {
     );
   }
 
-  handleBarCodeScanned = ({ type, data }) => {
+  handleBarCodeScanned = ({data }) => {
     this.setState({ scanned: true });
     alert(`Bar Code ${data} has been scanned and added!`);
-    this.props.setProductQr(data);
-    this.props.navigation.goBack();
+    this.props.setProductQr(data)
+    this.props.navigation.goBack()
+
+    fetch("http://localhost:3000/api/v1/folders")
+            .then(res => res.json())
+            .then((folders)=>{
+                const match = folders.filter(f => f.name.toUpperCase().includes(data.toUpperCase()) && f.user_id === this.props.user.id)
+                console.log("Match Product:===> ", match)
+                this.props.setCurrentFolder(match)
+            })
   };
 }
 
-export default connect(null, {setProductQr})(QRCodeGenerator)
+mapStateToProps = (state) => {
+  return{
+    user: state.user
+  }
+}
+
+export default connect(mapStateToProps, {setProductQr,setCurrentFolder})(QRCodeGenerator)

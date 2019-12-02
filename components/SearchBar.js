@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Text, TextInput, View, StyleSheet } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
 import { connect } from 'react-redux';
 import { setCurrentFolder, updateCurrentProduct } from '../actions'
 import { withNavigation } from 'react-navigation';
+import { Ionicons } from '@expo/vector-icons';
 
 class SearchBar extends Component {
     
@@ -25,19 +25,21 @@ class SearchBar extends Component {
     }
 
      handleProductSearch = () => {
-        this.props.navigation.navigate('QRCodeGenerator')
-        fetch("http://localhost:3000/api/v1/products")
-        .then(res => res.json())
-        .then((products)=>{
-            const match = products.filter(p => p.qr_id === this.props.qr_id)
-            // const folder = this.props.user.folders.find(f => f.id === match.folder_id)
-            this.props.updateCurrentProduct(match)
-            console.log("Match Product:===> ", match)
-        })
+        new Promise(()=>this.props.navigation.navigate('QRCodeGenerator'))
+
+        // this.props.navigation.navigate('QRCodeGenerator')
+        // fetch("http://localhost:3000/api/v1/products")
+        // .then(res => res.json())
+        // .then((products)=>{
+        //     const match = products.filter(p => p.qr_id === this.props.qr_id)
+        //     // const folder = this.props.user.folders.find(f => f.id === match.folder_id)
+        //     this.props.updateCurrentProduct(match)
+        //     console.log("Match Product:===> ", match)
+        // })
     }
 
     render(){
-        // console.log("Search QR ID:==> ",this.props.qr_id)
+        // this.setState({qr_id:this.props.qr_id})
         return(
             <View style={styles.searchField}>
                 <View style={styles.input}>
@@ -49,7 +51,10 @@ class SearchBar extends Component {
                         onSubmitEditing = {this.handleSubmit}
                         style={{flex:1}}
                     />
-                    <Text onPress={this.handleProductSearch}>Product</Text>
+                    
+                    <Text onPress={this.handleProductSearch}>
+                        <Ionicons  name="md-barcode" size={30} color="black" />
+                    </Text>
                 </View>
             </View>
         )
