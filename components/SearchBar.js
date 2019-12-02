@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Text, TextInput, View, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
-import { setCurrentFolder, updateCurrentProduct } from '../actions'
+import { setCurrentFolder, updateCurrentProduct,setEditProduct,setFolderProductSearch } from '../actions'
 import { withNavigation } from 'react-navigation';
 import { Ionicons } from '@expo/vector-icons';
 
@@ -19,27 +19,18 @@ class SearchBar extends Component {
         fetch("http://localhost:3000/api/v1/folders")
         .then(res => res.json())
         .then((folders)=>{
-            const match = folders.filter(f => f.name.includes(this.state.term))
+            const match = folders.filter(f => f.name.toUpperCase().includes(this.state.term.toUpperCase()))
             this.props.setCurrentFolder(match)
         })
     }
 
      handleProductSearch = () => {
-        new Promise(()=>this.props.navigation.navigate('QRCodeGenerator'))
-
-        // this.props.navigation.navigate('QRCodeGenerator')
-        // fetch("http://localhost:3000/api/v1/products")
-        // .then(res => res.json())
-        // .then((products)=>{
-        //     const match = products.filter(p => p.qr_id === this.props.qr_id)
-        //     // const folder = this.props.user.folders.find(f => f.id === match.folder_id)
-        //     this.props.updateCurrentProduct(match)
-        //     console.log("Match Product:===> ", match)
-        // })
+        this.props.setFolderProductSearch(true)
+       this.props.navigation.navigate('QRCodeGenerator')
     }
 
     render(){
-        // this.setState({qr_id:this.props.qr_id})
+        console.log("QR ID Inside Render:===> ", this.props.qr_id)
         return(
             <View style={styles.searchField}>
                 <View style={styles.input}>
@@ -95,4 +86,4 @@ mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, { setCurrentFolder, updateCurrentProduct})(withNavigation(SearchBar));
+export default connect(mapStateToProps, { setCurrentFolder, updateCurrentProduct,setEditProduct,setFolderProductSearch})(withNavigation(SearchBar));

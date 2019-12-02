@@ -1,33 +1,54 @@
-import React, { Component } from 'react';
-import { 
-    Text, 
+import React, {Component} from 'react';
+import { Text, 
     View, 
-    StyleSheet, 
-    TouchableOpacity, 
-    TextInput, 
-    Button,
-    KeyboardAvoidingView} from 'react-native';
+    Button, 
+    StyleSheet,
+    TextInput,
+    Image,
+    KeyboardAvoidingView } from 'react-native';
 import { Header } from 'react-native-elements';
 import { connect } from 'react-redux';
-import { updateCurrentProduct, setUser } from '../actions';
 import { withNavigation } from 'react-navigation';
-import ImagePick from '../components/ImagePick';
-import QRCodeGenerator from '../components/QRCodeGenerator';
+import {updateCurrentProduct,setUser,setCurrentFolder} from '../actions'
 
-class EditProduct extends Component {
-    state ={
-        name: "",
-        image: "",
-        quantity: 0,
-        price: 0,
-        description: "",
-        note: "",
-        folder_id: this.props.folder_id,
-        qr_id: this.props.qr_id? this.props.qr_id : ""
+class EditProduct extends Component{
+
+    //const {editProduct} = this.props
+    
+    state={
+        name: this.props.editProduct.name,
+        image: this.props.editProduct.image,
+        quantity: this.props.editProduct.quantity,
+        price: this.props.editProduct.price,
+        description: this.props.editProduct.description,
+        note: this.props.editProduct.note,
+        folder_id: this.props.editProduct.folder_id,
+        qr_id: this.props.editProduct.qr_id? this.props.editProduct.qr_id : null
     }
+    
     handleChange = (name,value) => {
         this.setState({[name]: value})
     }
+
+    handleSave = () => {
+        fetch("http://localhost:3000/api/v1/products/"+this.props.editProduct.id,{
+                method: "PATCH",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accepts": "application/json"
+                },
+                body: JSON.stringify(this.state)
+            })
+            .then(res => res.json())
+            .then(product => this.props.updateCurrentProduct(product))
+            .then(()=>this.props.navigation.goBack())
+
+        fetch("http://localhost:3000/api/v1/users/"+this.props.user.id)
+            .then(resp => resp.json())
+            .then((user)=>{
+                this.props.setUser(user)
+            })
+    }//handleSave
 
     randerBack = () => {
         return(
@@ -37,56 +58,15 @@ class EditProduct extends Component {
         )
     }
 
-    checkForEmpty = () => {
-        if(this.state.name === "")
-            this.setState({name: "New Product"})
-        if(this.state.description === "")
-            this.setState({description: "No description added"})
-        if(this.state.note === "")
-            this.setState({note: "No note added"})
-    }
-
-    handleSave = (id) => {
-      
-        this.checkForEmpty();
-        this.setState({qr_id: id.toString()},()=>
-                fetch("http://localhost:3000/api/v1/products",{
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                        "Accepts": "application/json"
-                    },
-                    body: JSON.stringify(this.state)
-                })
-                .then(res => res.json())
-                .then(product => this.props.updateCurrentProduct(product))
-                .then(()=>this.props.navigation.navigate('Home'))
-        )//setState 
-        fetch("http://localhost:3000/api/v1/users/"+this.props.user.id)
-        .then(resp => resp.json())
-        .then((user)=>{
-            this.props.setUser(user)
-        })
-    }
-
-    handleImageUrl = (url) => {
-        this.setState({image: url})
-    }
-
-    handleLinkProduct = () => {
-        this.props.navigation.navigate('QRCodeGenerator')
-    }
     render(){
-        // console.log("QR ID: ",this.state.qr_id)
-        console.log("QR ID FROM MAIN STATE: ",this.props.qr_id)
-        console.log("PRODUCT STATE, ", this.state)
+        console.log("EDIT PRODUCT: =====>",this.props.editProduct)
         return(
             <KeyboardAvoidingView behavior="position">
             <View >
                 <Header 
                 containerStyle = {{backgroundColor: '#0E82A7', height: 100}}
                 leftComponent = {this.randerBack}
-                centerComponent={{ text: "New Product", style: { color: '#fff', fontSize: 30, fontWeight: 'bold'} }}
+                centerComponent={{ text: "Edit Product", style: { color: '#fff', fontSize: 30, fontWeight: 'bold'} }}
                 />
                 <View style={styles.formContainer}>
                     <Text style={styles.inputTitle}>Product name</Text>
@@ -97,14 +77,13 @@ class EditProduct extends Component {
                         value={this.state.name}
                     />
                     <Text style={styles.inputTitle}>Product Image</Text>
-                    {/* <TextInput
-                        style={styles.input} 
-                        placeholder="Product Image" 
-                        onChangeText={(v)=>this.handleChange("image",v)} 
-                        value={this.state.image}
-                    /> */}
-                    <View><ImagePick handleImageUrl={this.handleImageUrl}/></View>
-                    <Button title="LINK ORCODE" onPress={this.handleLinkProduct} />
+                    
+                    <View>
+                        <Image 
+                            style={{width:100, height: 100, borderRadius: 5}}
+                            source={{uri: this.props.editProduct.image}}
+                        />    
+                    </View>
 
                     <Text style={styles.inputTitle}>Product Quantity</Text>
                     <TextInput
@@ -136,13 +115,15 @@ class EditProduct extends Component {
                         onChangeText={(v)=>this.handleChange("note",v)} 
                         value={this.state.note}
                     />
-                    <Button title="Save" onPress={()=>this.handleSave(this.props.qr_id)} />
+                    <Button 
+                        title="Save" 
+                        onPress={this.handleSave} 
+                    />
                 </View>
             </View>
             </KeyboardAvoidingView>
         )
     }
-    
 }
 
 const styles = StyleSheet.create({
@@ -166,10 +147,9 @@ const styles = StyleSheet.create({
 
 mapStateToProps = (state) => {
     return{
-        user: state.user,
-        folder_id: state.current_folder_id,
-        qr_id: state.product_qr
+        editProduct: state.editProduct,
+        user: state.user
     }
-}
+}   
 
-export default connect(mapStateToProps, { updateCurrentProduct, setUser })(withNavigation(EditProduct));
+export default connect(mapStateToProps,{updateCurrentProduct,setUser,setCurrentFolder})(withNavigation(EditProduct));

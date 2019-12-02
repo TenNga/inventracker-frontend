@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import { 
     Text, 
     View, 
-    StyleSheet, 
-    TouchableOpacity, 
+    StyleSheet,
     TextInput, 
     Button,
     KeyboardAvoidingView} from 'react-native';
@@ -12,7 +11,6 @@ import { connect } from 'react-redux';
 import { updateCurrentProduct, setUser } from '../actions';
 import { withNavigation } from 'react-navigation';
 import ImagePick from '../components/ImagePick';
-import QRCodeGenerator from '../components/QRCodeGenerator';
 
 class NewProduct extends Component {
     state ={
@@ -67,7 +65,7 @@ class NewProduct extends Component {
         .then((user)=>{
             this.props.setUser(user)
         })
-    }
+    }//handleSave
 
     handleImageUrl = (url) => {
         this.setState({image: url})
@@ -113,6 +111,7 @@ class NewProduct extends Component {
                         onChangeText={(v)=>this.handleChange("quantity",v)} 
                         value={this.state.quantity.toString()}
                         onFocus={()=>this.setState({quantity: ""})}
+                
                     />
                     <Text style={styles.inputTitle}>Product Price</Text>
                     <TextInput

@@ -20,7 +20,9 @@ const Contact = (props) => {
                     <Text onPress={()=>props.navigation.navigate('Profile')} style={styles.menuText}>
                         PROFILE
                     </Text>
-                    <Text onPress={()=>props.navigation.navigate('Contact')} style={styles.menuText}>CONTACT</Text>
+                    <Text onPress={()=>props.navigation.navigate('Contact')} style={styles.menuText}>
+                        CONTACT
+                    </Text>
                     <Text onPress={()=>{
                             props.clearState();
                             props.navigation.navigate('Login')

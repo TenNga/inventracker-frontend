@@ -9,7 +9,7 @@ import BottomFooter from '../components/BottomFooter';
 import FolderContainer from '../container/FolderContainer';
 
 
-const Landing = (props) => {
+const Landing = () => {
     return(
         <View style={{flex: 1}}>
             <TopHeader headerText={"InvenTracker"} />

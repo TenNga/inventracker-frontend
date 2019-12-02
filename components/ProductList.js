@@ -2,8 +2,8 @@ import React from 'react';
 import { Text, View, StyleSheet, Image, TouchableOpacity} from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { connect } from 'react-redux';
-
-import { setParentFolder, setUser } from '../actions'
+import { withNavigation } from 'react-navigation';
+import { setParentFolder, setUser,setEditProduct } from '../actions'
 
 
 const handleDelete = (props) => {
@@ -26,6 +26,11 @@ const handleDelete = (props) => {
       
 }
 
+handleProductSelection = (props) => {
+    props.setEditProduct(props.product)
+    props.navigation.navigate("EditProduct")
+}
+
 const ProductList = (props) => {
     return (
         <View style={styles.container}>
@@ -33,7 +38,7 @@ const ProductList = (props) => {
                 style={{width:100, height: 100, borderRadius: 5}}
                 source={{uri: props.product.image}}
             />
-            <TouchableOpacity>
+            <TouchableOpacity onPress={()=>handleProductSelection(props)}>
             <View style = {styles.description} >
                 <Text style = {styles.productName}>{props.product.name}</Text>
                 <Text style = {styles.productDesc}>Qty: {props.product.quantity} | $ {props.product.price * props.product.quantity}</Text>
@@ -82,4 +87,4 @@ mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, { setParentFolder, setUser })(ProductList);
+export default connect(mapStateToProps, { setParentFolder, setUser,setEditProduct })(withNavigation(ProductList));

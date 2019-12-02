@@ -10,6 +10,7 @@ import NewProduct from './screens/NewProduct';
 import Profile from './screens/Profile';
 import Contact from './screens/Contact';
 import Menu from './screens/Menu';
+import EditProduct from './screens/EditProduct';
 import QRCodeGenerator from './components/QRCodeGenerator';
 
 import reducer from './reducers';
@@ -51,6 +52,9 @@ const navigator = createStackNavigator(
     },
     QRCodeGenerator: {
       screen: QRCodeGenerator,
+    },
+    EditProduct: {
+      screen: EditProduct
     }
   },
   {

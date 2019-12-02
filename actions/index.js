@@ -25,6 +25,12 @@ export function updateCurrentProduct(product) {
 export function setProductQr(id){
     return { type: "SET_PRODUCT_QR", payload: id}
 }
+export function setEditProduct(product){
+    return { type: "SET_EDIT_PRODUCT", payload: product}
+}
+export function setFolderProductSearch(value){
+    return { type: "SET_FOLDER_PRODUCT_SEARCH", payload: value}
+}
 export function clearState(){
     return{ type: "CLEAR_STATE"}
 }

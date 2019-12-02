@@ -3,7 +3,9 @@ const defaultState = {
     parent_folder: "",
     current_folder_id: null,
     current_folders: [],
-    product_qr: ""
+    product_qr: "",
+    editProduct: "",
+    folderProductSearch: false
 }
 
 function reducer(prevState = defaultState, action){
@@ -21,9 +23,13 @@ function reducer(prevState = defaultState, action){
         case "UPDATE_CURRENT_FOLDER":
             return { ...prevState, current_folders: [...prevState.current_folders, action.payload]}
         case "UPDATE_PRODUCT":
-            return { ...prevState, parent_folder: {...prevState.parent_folder, products: [...prevState.parent_folder.products, action.payload]}}
+            return { ...prevState, parent_folder: {...prevState.parent_folder, products: [...prevState.parent_folder.products.filter(p => p.id !==action.payload.id), action.payload]}}
         case "SET_PRODUCT_QR":
             return{...prevState, product_qr: action.payload}
+        case "SET_EDIT_PRODUCT":
+            return{...prevState, editProduct: action.payload}
+        case "SET_FOLDER_PRODUCT_SEARCH":
+            return{...prevState, folderProductSearch: action.payload}
         case "CLEAR_STATE":
             return{...prevState,
                 user: "",
