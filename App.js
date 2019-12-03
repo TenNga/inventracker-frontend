@@ -11,6 +11,7 @@ import Profile from './screens/Profile';
 import Contact from './screens/Contact';
 import Menu from './screens/Menu';
 import EditProduct from './screens/EditProduct';
+import ProductShow from './screens/ProductShow';
 import QRCodeGenerator from './components/QRCodeGenerator';
 
 import reducer from './reducers';
@@ -55,7 +56,11 @@ const navigator = createStackNavigator(
     },
     EditProduct: {
       screen: EditProduct
+    },
+    ProductShow: {
+      screen: ProductShow
     }
+
   },
   {
     initialRouteName: 'Login',

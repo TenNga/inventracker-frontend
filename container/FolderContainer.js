@@ -22,11 +22,11 @@ class FolderContainer extends Component {
     }
 
     render(){
-        console.log("Rendering Landing Page.........")
-        // console.log("Producte Length/Size: ", this.props.parent_folder.products)
-        // console.log("Current Folder ID: ", this.props.current_folder_id)
-        console.log("Current Folders: ", this.props.current_folders.length)
-        // console.log("Current User Infomation=============>: ", this.props.currentUser)
+        // console.log("Rendering Landing Page.........")
+        // // console.log("Producte Length/Size: ", this.props.parent_folder.products)
+        // // console.log("Current Folder ID: ", this.props.current_folder_id)
+        // console.log("Current Folders: ", this.props.current_folders.length)
+        // // console.log("Current User Infomation=============>: ", this.props.currentUser)
         return(
             <View style={styles.mainFolderContainer}>
                 {this.props.current_folders && this.props.current_folders.length? 

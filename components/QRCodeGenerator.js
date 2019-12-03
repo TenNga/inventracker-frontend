@@ -59,8 +59,8 @@ class QRCodeGenerator extends React.Component {
             .then(res => res.json())
             .then((folders)=>{
                 const match = folders.filter(f => f.name.toUpperCase().includes(data.toUpperCase()) && f.user_id === this.props.user.id)
-                console.log("Match Folder:===> ", match.length)
-                console.log("QR ID:===> ", data)
+                // console.log("ALL FOLDER ", allFolder.length)
+                // console.log("QR ID:===> ", data)
                 if(match.length > 0){
                   this.props.setCurrentFolder(match)
                   this.props.navigation.goBack()
@@ -71,10 +71,14 @@ class QRCodeGenerator extends React.Component {
         .then(res => res.json())
         .then((products)=>{
             const match = products.filter(p => p.qr_id === data)
-            // const folder = this.props.user.folders.find(f => f.id === match.folder_id)
+            
             if(match.length>0){
               this.props.setEditProduct(match[0])
-              this.props.navigation.navigate("EditProduct")
+              this.props.navigation.navigate('ProductShow')
+              // const scanFolder = allFolder.find(f => f.id === match[0].folder_id)
+              // this.props.setCurrentFolder(scanFolder)
+              // console.log("SCAN FOLDER:====> ", allFolder.length)
+              // this.props.navigation.navigate("Home")
             }
         })
         this.props.setFolderProductSearch(false)
