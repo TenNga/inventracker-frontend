@@ -70,10 +70,17 @@ const styles = StyleSheet.create({
         marginTop: 20
     },
     info: {
+        height: 50,
+        textAlign: 'left',
+        textAlignVertical: 'center',
+        paddingLeft: 10,
         fontSize: 20,
+        fontWeight: 'bold',
+        color: 'white',
         marginTop: 15,
-        borderTopWidth: 2,
-        borderTopColor: 'rgba(12, 130, 167, 0.8)'
+        backgroundColor: 'rgba(12, 130, 167, 0.8)',
+        borderRadius: 10
+        
     },
     folder: {
         alignItems: 'center',

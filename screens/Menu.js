@@ -29,6 +29,11 @@ const Contact = (props) => {
                         }}style={styles.menuText}>LOG OUT</Text>
                 </View>
                 </ImageBackground>
+                <View style = {styles.footer}>
+                    <Text style={{flex:1,textAlign: 'center',marginVertical: 30, color: 'white'}}>
+                        Flatiron Scool - InvenTracker 2019
+                    </Text>
+                </View>
             
         </View>
     )
@@ -43,12 +48,17 @@ const styles = StyleSheet.create({
         alignSelf: 'stretch',
         justifyContent: 'flex-start',
         paddingBottom: 10,
-        borderBottomWidth: 2,
-        borderBottomColor: "#1b90b5",
         color: 'white',
-        fontWeight: 'bold',
         fontSize: 30,
         marginVertical: 20
+    },
+    footer: {
+        position: 'absolute',
+        height: 80,
+        backgroundColor: '#0E82A7',
+        left: 0,
+        right: 0,
+        bottom: 0
     }
 });
 

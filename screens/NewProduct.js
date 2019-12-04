@@ -79,13 +79,15 @@ class NewProduct extends Component {
         console.log("QR ID FROM MAIN STATE: ",this.props.qr_id)
         console.log("PRODUCT STATE, ", this.state)
         return(
-            <KeyboardAvoidingView behavior="position">
-            <View >
+            <View style={{flex:1}}>
                 <Header 
                 containerStyle = {{backgroundColor: '#0E82A7', height: 100}}
                 leftComponent = {this.randerBack}
                 centerComponent={{ text: "New Product", style: { color: '#fff', fontSize: 30, fontWeight: 'bold'} }}
                 />
+             <KeyboardAvoidingView behavior="padding"
+                style={{flex:1}}
+               enabled>
                 <View style={styles.formContainer}>
                     <Text style={styles.inputTitle}>Product name</Text>
                     <TextInput
@@ -137,8 +139,8 @@ class NewProduct extends Component {
                     />
                     <Button title="Save" onPress={()=>this.handleSave(this.props.qr_id)} />
                 </View>
-            </View>
             </KeyboardAvoidingView>
+            </View>
         )
     }
     
@@ -146,17 +148,20 @@ class NewProduct extends Component {
 
 const styles = StyleSheet.create({
     formContainer: {
+        flex:1,
         margin: 10
     },
     input: {
+        flex:1,
         fontSize: 20,
         backgroundColor: 'rgb(242, 246, 247)',
         paddingLeft: 5,
-        marginVertical: 10,
-        height: 35,
+        // marginVertical: 10,
+        // height: 35,
         borderRadius: 5
     },
     inputTitle: {
+        flex:1,
         color: '#0E82A7',
         fontSize: 20,
         fontWeight: 'bold'

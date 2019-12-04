@@ -5,15 +5,16 @@ import {
     StyleSheet, 
     TextInput, 
     Alert,
-    ImageBackground} from 'react-native';
+    ImageBackground,
+    TouchableOpacity} from 'react-native';
 import { setUser } from '../actions';
 import { connect } from 'react-redux';
 import { Header } from 'react-native-elements';
 
 class Login extends Component {
     state = {
-        user_name: "kk",
-        password: "123"
+        user_name: "Inventracker",
+        password: "123456"
     }
 
     handleUsername = (text) => {
@@ -50,7 +51,9 @@ class Login extends Component {
     render(){
         return(
             <View style={styles.container}>
-                <ImageBackground source={require('../assets/Background.png')} style={{position: 'absolute', top: 0, right: 0,bottom: 0, left: 0}}>
+                <ImageBackground 
+                    source={require('../assets/Background.png')} 
+                    style={{position: 'absolute', top: 0, right: 0,bottom: 0, left: 0}}>
             <Header 
             containerStyle = {{backgroundColor: 'rgb(93, 180, 227)'}}
             centerComponent={{ text: 'Welcome', style: { color: '#fff', fontSize: 30} }}
@@ -76,11 +79,13 @@ class Login extends Component {
                     autoCapitalize="none"
                     onSubmitEditing={this.handleLogin}
                 />
-                <View style={styles.userInfo}>
-                    <Text style={{ fontSize: 23, color: 'white' }} onPress={this.handleLogin} >
-                        Sign In
-                    </Text>
-                </View>
+                <TouchableOpacity onPress={this.handleLogin} >
+                    <View style={styles.userInfo}>
+                        <Text style={{ fontSize: 23, color: 'white' }}  >
+                            Sign In
+                        </Text>
+                    </View>
+                </TouchableOpacity>
                 {/* <Button style={styles.userInfo} title="Sign In" onPress={this.handleLogin} /> */}
                 <Text style={{textAlign: 'center'}}>New User? 
                     <Text style={{color: 'white', fontWeight: 'bold'}}

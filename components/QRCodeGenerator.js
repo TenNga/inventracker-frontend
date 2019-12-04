@@ -55,10 +55,11 @@ class QRCodeGenerator extends React.Component {
     this.props.setProductQr(data)
 
     if(this.props.folderProductSearch){
+      this.props.setProductQr("")
       fetch("http://localhost:3000/api/v1/folders")
             .then(res => res.json())
             .then((folders)=>{
-                const match = folders.filter(f => f.name.toUpperCase().includes(data.toUpperCase()) && f.user_id === this.props.user.id)
+                const match = folders.filter(f => f.name.toUpperCase()===data.toUpperCase() && f.user_id === this.props.user.id)
                 // console.log("ALL FOLDER ", allFolder.length)
                 // console.log("QR ID:===> ", data)
                 if(match.length > 0){

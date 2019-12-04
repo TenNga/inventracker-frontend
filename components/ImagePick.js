@@ -14,10 +14,20 @@ export default class ImagePick extends React.Component {
 
     return (
       <View>
-        <Button
-          title="Pick an image from camera roll"
-          onPress={this._pickImage}
-        />
+        <View>
+          <View style={{margin:5}}>
+          <Button
+            title="Take a picture with camera"
+            onPress={this._takePicture}
+          />
+        </View>
+        <View style={{margin: 5}}>
+          <Button
+            title="Pick an image from camera roll"
+            onPress={this._pickImage}
+          />
+        </View>
+        </View>
         {image &&
         //   <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />
         <Text>Image Selected</Text>
@@ -40,8 +50,23 @@ export default class ImagePick extends React.Component {
     }
   }
 
-  _pickImage = async () => {
+  _takePicture = async () => {
     let result = await ImagePicker.launchCameraAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1
+    });
+
+    // console.log(result);
+
+    if (!result.cancelled) {
+      this.setState({ image: result.uri });
+      this.props.handleImageUrl(result.uri)
+    }
+  };
+  _pickImage = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
       allowsEditing: true,
       aspect: [4, 3],

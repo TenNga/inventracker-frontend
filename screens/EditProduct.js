@@ -61,7 +61,7 @@ class EditProduct extends Component{
     render(){
         console.log("EDIT PRODUCT: =====>",this.props.editProduct)
         return(
-            <KeyboardAvoidingView behavior="position">
+            <KeyboardAvoidingView behavior="padding" enabled>
             <View >
                 <Header 
                 containerStyle = {{backgroundColor: '#0E82A7', height: 100}}

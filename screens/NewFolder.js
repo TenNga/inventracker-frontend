@@ -4,7 +4,8 @@ import {Text,
     Image, 
     StyleSheet, 
     TextInput, 
-    Button
+    Button,
+    Alert
 } from 'react-native';
 import { Header } from 'react-native-elements';
 import { withNavigation } from 'react-navigation';
@@ -29,26 +30,23 @@ class NewFolder extends Component {
     }
 
     handleSave = () => {
-        // console.log("Current Folder ID: ",this.props.folder_id)
-        // console.log("Current User ID: ",this.props.user_id)
-        
-        fetch("http://localhost:3000/api/v1/folders",{
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "Accepts": "application/json"
-            },
-            body: JSON.stringify(this.state)
-        })
-        .then(res => res.json())
-        .then(folder => this.props.updateCurrentFolder(folder))
-        .then(()=>this.props.navigation.navigate('Home'))
+            fetch("http://localhost:3000/api/v1/folders",{
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accepts": "application/json"
+                },
+                body: JSON.stringify(this.state)
+            })
+            .then(res => res.json())
+            .then(folder => this.props.updateCurrentFolder(folder))
+            .then(()=>this.props.navigation.navigate('Home'))
 
-        fetch("http://localhost:3000/api/v1/users/"+this.props.user.id)
-        .then(resp => resp.json())
-        .then((user)=>{
-            this.props.setUser(user)
-        })
+            fetch("http://localhost:3000/api/v1/users/"+this.props.user.id)
+            .then(resp => resp.json())
+            .then((user)=>{
+                this.props.setUser(user)
+            })
     }
     render(){
         return(
@@ -88,7 +86,8 @@ mapStateToProps = (state) => {
     return{
         user: state.user,
         folder_id: state.current_folder_id,
-        user_id: state.user.id
+        user_id: state.user.id,
+        current_folders: state.current_folders
     }
 }
 
