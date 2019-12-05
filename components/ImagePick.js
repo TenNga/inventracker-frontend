@@ -14,26 +14,23 @@ export default class ImagePick extends React.Component {
 
     return (
       <View>
-        <View>
-          <View style={{margin:5}}>
-          <Button
-            title="Take a picture with camera"
-            onPress={this._takePicture}
-          />
-        </View>
-        <View style={{margin: 5}}>
-          <Button
-            title="Pick an image from camera roll"
-            onPress={this._pickImage}
-          />
-        </View>
-        </View>
-        {image &&
-        <View>
-          <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />
-        <Text>Image Selected</Text>
-        </View>
-          }
+      {image? <Image source={{ uri: image }} style={{alignSelf: 'center', width: 100, height: 50 }} />:
+          <View style={{justifyContent:'center', flexDirection: 'row'}}>
+            <View style={{margin:5, width:200}}>
+              <Button
+                title="Camera"
+                onPress={this._takePicture}
+              />
+            </View>
+            <View style={{margin: 5, width:200}}>
+              <Button
+                title="Browse"
+                onPress={this._pickImage}
+              /> 
+            </View>
+          </View>
+        }
+       
       </View>
     );
   }

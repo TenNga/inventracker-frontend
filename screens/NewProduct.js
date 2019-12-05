@@ -11,6 +11,7 @@ import { connect } from 'react-redux';
 import { updateCurrentProduct, setUser } from '../actions';
 import { withNavigation } from 'react-navigation';
 import ImagePick from '../components/ImagePick';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 class NewProduct extends Component {
     state ={
@@ -97,12 +98,7 @@ class NewProduct extends Component {
                         value={this.state.name}
                     />
                     <Text style={styles.inputTitle}>Product Image</Text>
-                    {/* <TextInput
-                        style={styles.input} 
-                        placeholder="Product Image" 
-                        onChangeText={(v)=>this.handleChange("image",v)} 
-                        value={this.state.image}
-                    /> */}
+                    
                     <View><ImagePick handleImageUrl={this.handleImageUrl}/></View>
                     <Button title="LINK ORCODE" onPress={this.handleLinkProduct} />
 
@@ -137,7 +133,9 @@ class NewProduct extends Component {
                         onChangeText={(v)=>this.handleChange("note",v)} 
                         value={this.state.note}
                     />
-                    <Button title="Save" onPress={()=>this.handleSave(this.props.qr_id)} />
+                    <TouchableOpacity onPress={()=>this.handleSave(this.props.qr_id)}>
+                        <Text style={styles.save} >SAVE</Text>
+                    </TouchableOpacity>
                 </View>
             </KeyboardAvoidingView>
             </View>
@@ -165,6 +163,19 @@ const styles = StyleSheet.create({
         color: '#0E82A7',
         fontSize: 20,
         fontWeight: 'bold'
+    },
+    save: {
+        marginTop: 5,
+        height: 40,
+        alignSelf: 'center',
+        textAlign: 'center',
+        textAlignVertical: 'center',
+        fontSize: 20,
+        fontWeight: 'bold',
+        width: 300,
+        backgroundColor: '#0E82A7',
+        color: 'white',
+        borderRadius: 8
     }
 });
 
