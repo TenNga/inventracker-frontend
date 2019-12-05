@@ -24,7 +24,7 @@ const handleBack = (props) => {
         let parentFolder;
         if(props.parent_folder.folder_id){
             parentFolder = props.user_folders.find(f => f.id === props.parent_folder.folder_id)
-            console.log('BACK- Parent Folder Folder Size ===> ',parentFolder)
+            // console.log('BACK- Parent Folder Folder Size ===> ',parentFolder)
             props.setCurrentFolder(parentFolder.folders)
             props.setParentFolder(parentFolder);
             props.setCurrentFolderId(parentFolder.id);

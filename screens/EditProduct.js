@@ -10,6 +10,7 @@ import { Header } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { withNavigation } from 'react-navigation';
 import {updateCurrentProduct,setUser,setCurrentFolder} from '../actions'
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
 class EditProduct extends Component{
 
@@ -59,9 +60,9 @@ class EditProduct extends Component{
     }
 
     render(){
-        console.log("EDIT PRODUCT: =====>",this.props.editProduct)
+        // console.log("EDIT PRODUCT: =====>",this.props.editProduct)
         return(
-            <KeyboardAvoidingView behavior="padding" enabled>
+            <KeyboardAwareScrollView>
             <View >
                 <Header 
                 containerStyle = {{backgroundColor: '#0E82A7', height: 100}}
@@ -98,7 +99,7 @@ class EditProduct extends Component{
                         style={styles.input} 
                         placeholder="Price" 
                         onChangeText={(v)=>this.handleChange("price",v)} 
-                        value={this.state.price.toString()}
+                        value={this.state.price? this.state.price.toString(): "0"}
                         onFocus={()=>this.setState({price: ""})}
                     />
                     <Text style={styles.inputTitle}>Product Description</Text>
@@ -121,7 +122,7 @@ class EditProduct extends Component{
                     />
                 </View>
             </View>
-            </KeyboardAvoidingView>
+            </KeyboardAwareScrollView>
         )
     }
 }

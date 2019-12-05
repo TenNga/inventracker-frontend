@@ -44,8 +44,8 @@ const ProductShow = (props) => {
             <View style={styles.profileDesc}>
                 <Text style={styles.info}>PRODUCT NAME: {props.editProduct.name}</Text>
                 <Text style={styles.info}>QUANTITY: {props.editProduct.quantity}</Text>
-                <Text style={styles.info}>PRICE: {props.editProduct.price}</Text>
-                <Text style={styles.info}>TOTAL: {props.editProduct.quantity * props.editProduct.price}</Text>
+                <Text style={styles.info}>PRICE: ${props.editProduct.price}</Text>
+                <Text style={styles.info}>TOTAL: ${props.editProduct.quantity * props.editProduct.price}</Text>
                 <Text style={styles.info}>DESCRIPTION: {props.editProduct.description}</Text>
                 <Text style={styles.info}>ISBN # {props.editProduct.qr_id}</Text>
                 

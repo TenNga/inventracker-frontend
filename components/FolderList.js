@@ -17,9 +17,9 @@ const FolderList = (props) => {
     }
 
     const handleDelete = () => {
-        console.log("before filter size: ", props.current_folders.length);
+        // console.log("before filter size: ", props.current_folders.length);
         const newFolders = props.current_folders.filter(f => f.id !== props.folderInfo.id)
-        console.log("after filter size: ", newFolders.length)
+        // console.log("after filter size: ", newFolders.length)
         props.setCurrentFolder(newFolders);
         // console.log("Current Folder==> ", current_folders)
         fetch("http://localhost:3000/api/v1/folders/"+props.folderInfo.id,{

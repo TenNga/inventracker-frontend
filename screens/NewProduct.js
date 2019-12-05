@@ -76,8 +76,8 @@ class NewProduct extends Component {
     }
     render(){
         // console.log("QR ID: ",this.state.qr_id)
-        console.log("QR ID FROM MAIN STATE: ",this.props.qr_id)
-        console.log("PRODUCT STATE, ", this.state)
+        // console.log("QR ID FROM MAIN STATE: ",this.props.qr_id)
+        // console.log("PRODUCT STATE, ", this.state)
         return(
             <View style={{flex:1}}>
                 <Header 

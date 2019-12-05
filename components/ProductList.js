@@ -16,7 +16,7 @@ const handleDelete = (props) => {
             "Content-Type": "application/json",
             "Accepts": "application/json"
         }
-    }).then(()=>console.log("After Fetchinging....."))
+    })
     
         fetch("http://localhost:3000/api/v1/users/"+props.user.id)
         .then(resp => resp.json())

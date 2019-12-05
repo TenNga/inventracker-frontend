@@ -29,8 +29,10 @@ export default class ImagePick extends React.Component {
         </View>
         </View>
         {image &&
-        //   <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />
+        <View>
+          <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />
         <Text>Image Selected</Text>
+        </View>
           }
       </View>
     );

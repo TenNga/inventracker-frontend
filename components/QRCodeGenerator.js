@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Text, View, StyleSheet, Button } from 'react-native';
+import { Text, View, StyleSheet, Button,Alert } from 'react-native';
 import * as Permissions from 'expo-permissions';
 import { BarCodeScanner } from 'expo-barcode-scanner';
 import { connect }from 'react-redux';
@@ -51,7 +51,7 @@ class QRCodeGenerator extends React.Component {
 
   handleBarCodeScanned = ({data }) => {
     this.setState({ scanned: true });
-    alert(`Bar Code ${data} has been scanned and added!`);
+    Alert.alert('SUCCESS',`Bar Code ${data} has been scanned and added!`);
     this.props.setProductQr(data)
 
     if(this.props.folderProductSearch){
