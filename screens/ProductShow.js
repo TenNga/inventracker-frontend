@@ -9,7 +9,7 @@ import { setCurrentFolder } from '../actions';
 const ProductShow = (props) => {
 
     const handleGoToFolder = () => {
-        fetch("http://localhost:3000/api/v1/folders")
+        fetch("https://arcane-wildwood-85713.herokuapp.com/api/v1/folders")
             .then(res => res.json())
             .then((folders)=>{
                 const match = folders.filter(f => f.id === props.editProduct.folder_id && f.user_id === props.user.id)

@@ -13,8 +13,8 @@ import { Header } from 'react-native-elements';
 
 class Login extends Component {
     state = {
-        user_name: "Inventracker",
-        password: "123456"
+        user_name: "",
+        password: ""
     }
 
     handleUsername = (text) => {
@@ -25,7 +25,7 @@ class Login extends Component {
     }
 
     handleLogin = () => {
-        fetch("http://localhost:3000/api/v1/login",{
+        fetch("https://arcane-wildwood-85713.herokuapp.com/api/v1/login",{
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

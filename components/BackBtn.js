@@ -19,8 +19,6 @@ const BackBtn = (props) => {
 }
 
 const handleBack = (props) => {
-        // fetchUser(props).then(()=>{
-            // console.log("Current props: ", props)
         let parentFolder;
         if(props.parent_folder.folder_id){
             parentFolder = props.user_folders.find(f => f.id === props.parent_folder.folder_id)
@@ -38,15 +36,6 @@ const handleBack = (props) => {
     // })
 }
 
-// fetchUser = (props) => {
-//     return (
-//         fetch("http://10.0.2.2:3000/api/v1/users/"+props.user.id)
-//         .then(resp => resp.json())
-//         .then((user)=>{
-//             props.setUser(user)
-//         })
-//         )
-// }
 
 const styles = StyleSheet.create({
     backBtn: {

@@ -32,7 +32,7 @@ class EditProduct extends Component{
     }
 
     handleSave = () => {
-        fetch("http://localhost:3000/api/v1/products/"+this.props.editProduct.id,{
+        fetch("https://arcane-wildwood-85713.herokuapp.com/api/v1/products/"+this.props.editProduct.id,{
                 method: "PATCH",
                 headers: {
                     "Content-Type": "application/json",
@@ -44,7 +44,7 @@ class EditProduct extends Component{
             .then(product => this.props.updateCurrentProduct(product))
             .then(()=>this.props.navigation.goBack())
 
-        fetch("http://localhost:3000/api/v1/users/"+this.props.user.id)
+        fetch("https://arcane-wildwood-85713.herokuapp.com/api/v1/users/"+this.props.user.id)
             .then(resp => resp.json())
             .then((user)=>{
                 this.props.setUser(user)

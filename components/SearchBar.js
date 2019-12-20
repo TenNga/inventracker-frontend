@@ -16,7 +16,7 @@ class SearchBar extends Component {
 
     handleSubmit = () =>{
         
-        fetch("http://localhost:3000/api/v1/folders")
+        fetch("https://arcane-wildwood-85713.herokuapp.com/api/v1/folders")
         .then(res => res.json())
         .then((folders)=>{
             const match = folders.filter(f => f.name.toUpperCase().includes(this.state.term.toUpperCase()))

@@ -25,6 +25,8 @@
     ],
     "ios": {
       "supportsTablet": true
-    }
+    },
+    "description": "Are you tired of using those complex application to manage your inventory for your business or personal use, say hello to InvenTracker. InvenTracker is a simple but powerful mobile application made for anyone who wants a simple inventory management system where you can add products with a picture with description and also with a key feature that will find a product on one click called \"one-touch scanner\".",
+    "githubUrl": "https://github.com/TenNga/inventracker-frontend"
   }
 }

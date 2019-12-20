@@ -56,7 +56,7 @@ class QRCodeGenerator extends React.Component {
 
     if(this.props.folderProductSearch){
       this.props.setProductQr("")
-      fetch("http://localhost:3000/api/v1/folders")
+      fetch("https://arcane-wildwood-85713.herokuapp.com/api/v1/folders")
             .then(res => res.json())
             .then((folders)=>{
                 const match = folders.filter(f => f.name.toUpperCase()===data.toUpperCase() && f.user_id === this.props.user.id)
@@ -68,7 +68,7 @@ class QRCodeGenerator extends React.Component {
                 }
             })
 
-        fetch("http://localhost:3000/api/v1/products")
+        fetch("https://arcane-wildwood-85713.herokuapp.com/api/v1/products")
         .then(res => res.json())
         .then((products)=>{
             const match = products.filter(p => p.qr_id === data)

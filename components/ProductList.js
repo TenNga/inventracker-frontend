@@ -10,7 +10,7 @@ const handleDelete = (props) => {
     const newProducts = props.parent_folder.products.filter(p => p.id !== props.product.id)
     props.setParentFolder({...props.parent_folder,products: newProducts});
     // console.log("Parent Folder===> ", props.parent_folder)
-    fetch("http://localhost:3000/api/v1/products/"+props.product.id,{
+    fetch("https://arcane-wildwood-85713.herokuapp.com/api/v1/products/"+props.product.id,{
         method: "DELETE",
         headers: {
             "Content-Type": "application/json",
@@ -18,7 +18,7 @@ const handleDelete = (props) => {
         }
     })
     
-        fetch("http://localhost:3000/api/v1/users/"+props.user.id)
+        fetch("https://arcane-wildwood-85713.herokuapp.com/api/v1/users/"+props.user.id)
         .then(resp => resp.json())
         .then((user)=>{
             props.setUser(user)

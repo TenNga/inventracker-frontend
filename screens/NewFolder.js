@@ -30,7 +30,7 @@ class NewFolder extends Component {
     }
 
     handleSave = () => {
-            fetch("http://localhost:3000/api/v1/folders",{
+            fetch("https://arcane-wildwood-85713.herokuapp.com/api/v1/folders",{
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -42,7 +42,7 @@ class NewFolder extends Component {
             .then(folder => this.props.updateCurrentFolder(folder))
             .then(()=>this.props.navigation.navigate('Home'))
 
-            fetch("http://localhost:3000/api/v1/users/"+this.props.user.id)
+            fetch("https://arcane-wildwood-85713.herokuapp.com/api/v1/users/"+this.props.user.id)
             .then(resp => resp.json())
             .then((user)=>{
                 this.props.setUser(user)

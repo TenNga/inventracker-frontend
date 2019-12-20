@@ -5,10 +5,19 @@ giadd
 # Demo
 ![](InvenTrackerDemo.gif)
 
-# Requirement
+# Demo using your phone
+
+1. Download: Expo app in your phone
+    * Android: https://play.google.com/store/apps/details?id=host.exp.exponent&referrer=www
+    * iOS: https://apps.apple.com/app/apple-store/id982107779
+
+2. Visit: https://expo.io/@kevinkarma/Inventracker 
+
+3. Scane: QR Code using Expo app and enjoy the applicaiton
+
+# Requirement to test code
 
 Base: 
-
     * Text Editor (Prefer: VS Code)
     * Ruby on Rails for backend
     * Expo Environment

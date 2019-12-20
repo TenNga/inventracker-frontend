@@ -22,7 +22,7 @@ const FolderList = (props) => {
         // console.log("after filter size: ", newFolders.length)
         props.setCurrentFolder(newFolders);
         // console.log("Current Folder==> ", current_folders)
-        fetch("http://localhost:3000/api/v1/folders/"+props.folderInfo.id,{
+        fetch("https://arcane-wildwood-85713.herokuapp.com/api/v1/folders/"+props.folderInfo.id,{
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json",
@@ -30,7 +30,7 @@ const FolderList = (props) => {
             }
         }).then(()=>console.log("After Fetchinging....."))
         
-        fetch("http://localhost:3000/api/v1/users/"+props.user.id)
+        fetch("https://arcane-wildwood-85713.herokuapp.com/api/v1/users/"+props.user.id)
         .then(resp => resp.json())
         .then((user)=>{
             props.setUser(user)

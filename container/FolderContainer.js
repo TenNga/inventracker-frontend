@@ -9,7 +9,7 @@ import { Ionicons } from '@expo/vector-icons';
 class FolderContainer extends Component {
 
     fetchUser = () => {
-        fetch("http://localhost:3000/api/v1/users/"+this.props.currentUser.id)
+        fetch("https://arcane-wildwood-85713.herokuapp.com/api/v1/users/"+this.props.currentUser.id)
         .then(resp => resp.json())
         .then((user)=>{
             this.props.setUser(user)
