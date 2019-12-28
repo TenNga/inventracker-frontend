@@ -5,11 +5,13 @@ giadd
 # Demo
 ![](InvenTrackerDemo.gif)
 
+# [ Video Demo ](https://www.youtube.com/watch?v=R102PHwd42Y)
+
 # Demo using your phone (Android Only)
 
 1. Download: Expo app in your phone
-    * Android: https://play.google.com/store/apps/details?id=host.exp.exponent&referrer=www
-
+    * [Android](https://play.google.com/store/apps/details?id=host.exp.exponent&referrer=www
+)
 2. Visit: https://expo.io/@kevinkarma/Inventracker 
 
 3. Scan: QR Code using Expo app and enjoy the applicaiton
