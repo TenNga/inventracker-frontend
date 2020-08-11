@@ -25,6 +25,8 @@ class Login extends Component {
     }
 
     handleLogin = () => {
+        this.setState({user_name: "Loading...", password: "Loading..."});
+
         fetch("https://arcane-wildwood-85713.herokuapp.com/api/v1/login",{
             method: "POST",
             headers: {
@@ -82,7 +84,7 @@ class Login extends Component {
                 <TouchableOpacity onPress={this.handleLogin} >
                     <View style={styles.userInfo}>
                         <Text style={{ fontSize: 23, color: 'white' }}  >
-                            Sign In
+                            {this.state.user_name === "empty"? "Loading" : "Sign In"}
                         </Text>
                     </View>
                 </TouchableOpacity>
