@@ -14,7 +14,8 @@ import { Header } from 'react-native-elements';
 class Login extends Component {
     state = {
         user_name: "",
-        password: ""
+        password: "",
+        loading: false
     }
 
     handleUsername = (text) => {
@@ -25,15 +26,15 @@ class Login extends Component {
     }
 
     handleLogin = () => {
-        this.setState({user_name: "Loading...", password: "Loading..."});
-
+        //this.setState({user_name: "Loading...", password: "Loading..."});
+        this.setState({loading: true});
         fetch("https://arcane-wildwood-85713.herokuapp.com/api/v1/login",{
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
                 "Accepts": "application/json"
             },
-            body: JSON.stringify(this.state)
+            body: JSON.stringify({user_name: this.state.user_name.toUpperCase(), password: this.state.password})
         })
         .then(res => res.json())
         .then(this.handleResponse)
@@ -44,6 +45,7 @@ class Login extends Component {
             Alert.alert("Error",resp.errors)
         else{
             // console.log("User Info after Fetch:=======> ,", resp)
+            this.setState({loading: false})
             this.props.setUser(resp)
             this.props.navigation.navigate('Home')
         }
@@ -84,7 +86,7 @@ class Login extends Component {
                 <TouchableOpacity onPress={this.handleLogin} >
                     <View style={styles.userInfo}>
                         <Text style={{ fontSize: 23, color: 'white' }}  >
-                            {this.state.user_name === "empty"? "Loading" : "Sign In"}
+                            {this.state.loading? "Loading" : "Sign In"}
                         </Text>
                     </View>
                 </TouchableOpacity>

@@ -18,26 +18,36 @@ class SignUp extends Component {
             first_name: "",
             last_name: "",
             password: ""
-        }
+        },
+        loading: false
 
 }
 
     handleSignup = () => { //handle fetch request
+        this.setState({loading: true});
         fetch("https://arcane-wildwood-85713.herokuapp.com/api/v1/users",{
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
                 "Accepts": "application/json"
             },
-            body: JSON.stringify(this.state)
+            body: JSON.stringify({
+                user_name: this.state.user.user_name.toUpperCase(),
+                first_name: this.state.user.first_name,
+                last_name: this.state.user.last_name,
+                password: this.state.user.password
+            })
         })
         .then(res => res.json())
-        .then(user=>this.props.setUser(user))
+        .then(user=>{
+            this.setState({loading: false})
+            this.props.setUser(user)
+        })
         .then(()=>this.props.navigation.navigate('Home'))
     }
 
     render(){
-        // console.log("Main State for user: ", this.props.state)
+         console.log("Main State for user: ", this.state)
         return(
         <View style={styles.container}>
             <Header 
@@ -50,19 +60,19 @@ class SignUp extends Component {
             </View>
             <TextInput 
                 placeholder="User Name" 
-                onChangeText={(v)=>this.setState({user_name: v})}
+                onChangeText={(v)=>this.setState({user: {...this.state.user,user_name: v}})}
                 value={this.state.user_name}
                 style={styles.input}
                 />
             <TextInput 
                     placeholder="First Name" 
-                    onChangeText={(v)=>this.setState({first_name: v})}
+                    onChangeText={(v)=>this.setState({user:{...this.state.user,first_name: v}})}
                     value={this.state.first_name}
                     style={styles.input}
                     />
             <TextInput 
                 placeholder="Last Name" 
-                onChangeText={(v)=>this.setState({last_name: v})}
+                onChangeText={(v)=>this.setState({user: {...this.state.user,last_name: v}})}
                 value={this.state.last_name}
                 style={styles.input}
                 />
@@ -70,7 +80,7 @@ class SignUp extends Component {
                 placeholder="Password" 
                 autoCapitalize="none"
                 onChangeText={(v)=>{
-                    this.setState({password: v});
+                    this.setState({user: {...this.state.user,password: v}});
                     
                 }}
                 value={this.state.password}
@@ -79,7 +89,7 @@ class SignUp extends Component {
                 />
             <View style={styles.userInfo}>
                     <Text style={{  fontSize: 23, color: 'white' }} onPress={this.handleSignup} >
-                        Sign Up
+                        {this.state.loading? "Loading..." : "Sign Up" }
                     </Text>
             </View>
 
