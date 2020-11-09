@@ -146,7 +146,7 @@ const styles = StyleSheet.create({
     }
 });
 
-mapStateToProps = (state) => {
+const mapStateToProps = (state) => {
     return{
         editProduct: state.editProduct,
         user: state.user

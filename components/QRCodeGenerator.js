@@ -90,7 +90,7 @@ class QRCodeGenerator extends React.Component {
   };
 }
 
-mapStateToProps = (state) => {
+const mapStateToProps = (state) => {
   return{
     user: state.user,
     folderProductSearch: state.folderProductSearch

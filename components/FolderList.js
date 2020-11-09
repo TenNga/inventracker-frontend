@@ -82,7 +82,7 @@ const styles = StyleSheet.create({
         margin: 2
     }
 })
-mapStateToProps = (state) =>{
+const mapStateToProps = (state) =>{
     return {
         user: state.user,
         current_folders: state.current_folders,

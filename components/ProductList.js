@@ -26,7 +26,7 @@ const handleDelete = (props) => {
       
 }
 
-handleProductSelection = (props) => {
+const handleProductSelection = (props) => {
     props.setEditProduct(props.product)
     props.navigation.navigate("EditProduct")
 }
@@ -80,7 +80,7 @@ const styles = StyleSheet.create({
     }
 })
 
-mapStateToProps = (state) => {
+const mapStateToProps = (state) => {
     return{
         user: state.user,
         parent_folder: state.parent_folder

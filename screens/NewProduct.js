@@ -179,12 +179,8 @@ const styles = StyleSheet.create({
     }
 });
 
-mapStateToProps = (state) => {
-    return{
-        user: state.user,
-        folder_id: state.current_folder_id,
-        qr_id: state.product_qr
-    }
+const mapStateToProps = (state) => {
+    
 }
 
 export default connect(mapStateToProps, { updateCurrentProduct, setUser })(withNavigation(NewProduct));

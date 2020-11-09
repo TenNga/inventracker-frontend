@@ -7,7 +7,7 @@ import { withNavigation } from 'react-navigation';
 import { clearState } from '../actions';
 import { Ionicons } from '@expo/vector-icons';
 
-handleMenu = (props) => {
+const handleMenu = (props) => {
     props.navigation.navigate('Menu')
     // props.clearState();
 }
@@ -24,7 +24,7 @@ const TopHeader = (props) => {
         </View>
     )
 }
-mapStateToProps = (state) => {
+const mapStateToProps = (state) => {
     return {currentFolderId: state.current_folder_id}
 }
 export default connect(mapStateToProps,{ clearState })(withNavigation(TopHeader));

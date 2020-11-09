@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
     }
 });
 
-mapStateToProps = (state) => {
+const mapStateToProps = (state) => {
     return {
             user: state.user
         }

@@ -152,7 +152,7 @@ const styles = StyleSheet.create({
     }
 })
 
-mapStateToProps = (state) => {
+const mapStateToProps = (state) => {
     return{
         state: state.user
     }

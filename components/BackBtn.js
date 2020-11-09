@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
     }
 })
 
-mapStateToProps = (state) => {
+const mapStateToProps = (state) => {
     return{
         user: state.user,
         parent_folder: state.parent_folder,

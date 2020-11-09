@@ -5,7 +5,6 @@ import { withNavigation } from 'react-navigation';
 import { clearState } from '../actions';
 import { connect } from 'react-redux';
 import { Ionicons } from '@expo/vector-icons';
-import { Transition } from 'react-native-reanimated';
 
 const Contact = (props) => {
     return(

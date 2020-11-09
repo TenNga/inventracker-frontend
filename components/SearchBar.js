@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
     }
 })
 
-mapStateToProps = (state) => {
+const mapStateToProps = (state) => {
     return {
         allFolders: state.user.folders,
         qr_id: state.product_qr,
